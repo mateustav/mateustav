@@ -1,0 +1,25 @@
+.contact-form {
+  label {
+    color: $grey-dark;
+  }
+
+  input,
+  textarea {
+    border-color: $grey-dark;
+    border-radius: 0;
+  }
+
+  @include placeholder {
+    font-weight: 300;
+    color: $grey-light;
+  }
+
+  button {
+    background-color: $grey-dark;
+
+    &:hover {
+      background-color: $grey-med;
+      border-color: $grey-med;
+    }
+  }
+}

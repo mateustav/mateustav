@@ -1,7 +1,15 @@
-#site-navbar {
-  background-color: $color-primary;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+.navbar-brand {
+  color: $grey-dark;
+}
+
+#navbar-nav {
+  .btn {
+    background-color: $grey-dark;
+    transition: none;
+
+    &:hover {
+      background-color: $grey-med;
+      border-color: $grey-med;
+    }
+  }
 }

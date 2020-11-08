@@ -1,38 +1,100 @@
-div.main {
-  min-height: 100vh;
-  padding-bottom: 60px;
+:root {
+  --font-family-sans-serif: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", , "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-div.full-height {
-  min-height: 100vh;
+body {
+  font-family: 'Roboto', monospace, sans-serif;
+  -webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
-a.link-no-style {
-  &:hover {
-    text-decoration: none;
+
+@media(min-width: map-get($grid-breakpoints, "md")) {
+  .container {
+    max-width: map-get($grid-breakpoints, "md");
   }
 }
 
-.footer-col {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  align-items: center;
-  footer {
-    display: flex;
-    position: relative;
-    bottom: 0;
-    margin-top: -60px;
-    height: 60px;
-    clear: both;
-    background-color: $color-primary;
-    color: white;
-    justify-content: center;
-    width: 100%;
+h1 {
+  font-size: 1.25rem;
 
-    span {
-      align-self: center;
-      text-align: center;
+  @include media-breakpoint-up(sm) { font-size: 1.5rem; }
+  @include media-breakpoint-up(md) { font-size: 1.75rem; }
+}
+
+.navbar-light {
+
+  .navbar-brand {
+    color: $grey-dark;
+    font-size: 1.25rem;
+  }
+
+  .navbar-nav {
+
+    .nav-link {
+      color: $grey-dark;
     }
+  }
+
+  .link-no-style {
+    //disable original focus style
+    &:focus,
+    &:hover {
+      text-decoration: none;
+    }
+
+    &.active {
+      span {
+        position: relative;
+
+        @include media-breakpoint-up(sm) {
+          &::after {
+            @include link-text-decoration;
+            visibility: visible;
+            transform: scaleX(.75);
+          }
+        }
+      }
+    }
+  }
+}
+
+.fa-calendar {
+  --fa-primary-color: #{$red};
+  --fa-secondary-color: #{$grey-light};
+}
+
+.fa-pencil {
+  --fa-primary-color: #{$grey-light};
+  --fa-secondary-color: #{$red};
+}
+
+.blog-listing {
+
+  .excerpt {
+    letter-spacing: .02rem;
+    line-height: 1.55;
+  }
+
+  .read-more {
+
+    &::after {
+      @extend %link-text-decoration;
+      visibility: hidden;
+      transform: scaleX(0);
+      transition: all 0.2s ease-in-out 0s;
+    }
+
+    &:hover::after {
+      visibility: visible;
+      transform: scaleX(1);
+    }
+  }
+}
+
+footer {
+  .fa-heart {
+    --fa-primary-color: #{$red};
+    --fa-secondary-color: #{$grey-light};
   }
 }

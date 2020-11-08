@@ -7,10 +7,12 @@
 
 import React from "react"
 import { StaticQuery, graphql } from "gatsby"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart } from '@fortawesome/pro-duotone-svg-icons'
+import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { OutboundLink } from "gatsby-plugin-google-analytics"
 
 import { Container, Row, Col } from "react-bootstrap"
-
-import Header from "./header"
 import Navbar from "./navBar"
 
 const Layout = ({ children, pageInfo }) => (
@@ -20,36 +22,28 @@ const Layout = ({ children, pageInfo }) => (
         site {
           siteMetadata {
             title
+            description
           }
         }
       }
     `}
     render={data => (
       <>
-        <Container fluid className="px-0 main">
-          <Row noGutters className="justify-content-center">
+        <Navbar pageInfo={pageInfo} />
+        <Container>
+          <Row>
             <Col>
-              <Header siteTitle={data.site.siteMetadata.title} />
-            </Col>
-          </Row>
-          <Navbar pageInfo={pageInfo} />
-          <Row noGutters>
-            <Col>
-              <Container className="mt-5">
-                <main>{children}</main>
-              </Container>
+              <main>{children}</main>
             </Col>
           </Row>
         </Container>
-        <Container fluid className="px-0">
-          <Row noGutters>
-            <Col className="footer-col">
-              <footer>
-                <span>
-                  © {new Date().getFullYear()}, Built with
-                  {` `}
-                  <a href="https://www.gatsbyjs.org">Gatsby</a>
-                </span>
+        <Container>
+          <Row className="justify-content-center my-5">
+            <Col>
+              <footer className="text-center">
+                <p>© {new Date().getFullYear()} – Built with <FontAwesomeIcon icon={faHeart} /> by yours truly</p>
+                <span className="p-2"><OutboundLink href="https://github.com/mateustav"><FontAwesomeIcon icon={faGithub} className="fa-lg" /></OutboundLink></span>
+                <span className="p-2"><OutboundLink href="https://twitter.com/mattavares"><FontAwesomeIcon icon={faTwitter} className="fa-lg" /></OutboundLink></span>
               </footer>
             </Col>
           </Row>

@@ -1,9 +1,8 @@
-# Gatsby React Bootstrap Starter
+# Mateus' very own site
 
-A GatsbyJS starter that includes
+Technologies that I used:
 
+- gatsbyjs
 - react-bootstrap
-- react-icons
-- sticky on scroll navbar
-- SASS compiler
-- basic layout
+- font awesome 5 pro
+- johnny cash
