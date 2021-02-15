@@ -40,10 +40,10 @@ const Layout = ({ children, pageInfo }) => (
         <Container>
           <Row className="justify-content-center my-5">
             <Col>
-              <footer className="text-center">
+              <footer className="text-center mt-5">
                 <p>© {new Date().getFullYear()} – Built with <FontAwesomeIcon icon={faHeart} /> by yours truly</p>
                 <span className="p-2"><OutboundLink href="https://github.com/mateustav"><FontAwesomeIcon icon={faGithub} className="fa-lg" /></OutboundLink></span>
-                <span className="p-2"><OutboundLink href="https://twitter.com/mattavares"><FontAwesomeIcon icon={faTwitter} className="fa-lg" /></OutboundLink></span>
+                <span className="p-2"><OutboundLink href="https://twitter.com/mateustav"><FontAwesomeIcon icon={faTwitter} className="fa-lg" /></OutboundLink></span>
               </footer>
             </Col>
           </Row>
