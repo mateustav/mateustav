@@ -19,6 +19,16 @@ const CustomNavbar = ({ pageInfo }) => {
                   Home
                 </Nav.Link>
               </Link>
+              <Link to="/posts/" className="link-no-style" activeClassName="active">
+                <Nav.Link as="span" eventKey="about-me" className="px-sm-3">
+                  Posts
+                </Nav.Link>
+              </Link>
+              <Link to="/projects/" className="link-no-style" activeClassName="active">
+                <Nav.Link as="span" eventKey="about-me" className="px-sm-3">
+                  Projects
+                </Nav.Link>
+              </Link>
               <Link to="/about-me/" className="link-no-style" activeClassName="active">
                 <Nav.Link as="span" eventKey="about-me" className="px-sm-3">
                   About
