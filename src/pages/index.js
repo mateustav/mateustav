@@ -9,7 +9,7 @@ const Home = ({
 }) => {
   return (
   <Layout pageInfo={{ pageName: "Home" }}>
-    <SEO title="Home" />
+    <SEO title="Hi, I'm Mat!" />
     <Header/>
   </Layout>
 )}

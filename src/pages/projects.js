@@ -19,8 +19,8 @@ const Projects = ({
   // console.log(headerImage);
   // console.log(cashQuote);
   return (
-  <Layout pageInfo={{ pageName: "About Me" }}>
-  <SEO title="About Me" />
+  <Layout pageInfo={{ pageName: "Projects" }}>
+  <SEO title="Projects" />
   <Header/>
 
   <Container className="about-me-section">

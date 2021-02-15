@@ -13,7 +13,7 @@ export default function PostList({
   const { allMarkdownRemark } = data; // data.allMarkdownRemark holds the posts
   const { edges } = allMarkdownRemark;
   const { currentPage } = pageContext;
-  const title = currentPage === 1 ? `Hi, I'm Mat!` : `Page ${currentPage.toString()}`;
+  const title = currentPage === 1 ? `Posts` : `Posts - Page ${currentPage.toString()}`;
   return (
     <Layout pageInfo={{ pageName: "index" }}>
       <SEO title={`${title}`} />
