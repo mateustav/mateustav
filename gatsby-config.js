@@ -58,14 +58,16 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-styled-components`,
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      resolve: `gatsby-plugin-webfonts`,
       options: {
-        fonts: [
-          {
-            family: `Roboto`,
-            variants: [`300`, `300i`, `400`, `400i`, `500`, `700`]
-          },
-        ],
+        fonts: {
+          google: [
+            {
+              family: `Roboto`,
+              variants: [`300`, `300i`, `400`, `400i`, `500`, `700`]
+            }
+          ]
+        },
       },
     },
     {
