@@ -7,13 +7,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquareFull } from '@fortawesome/free-solid-svg-icons'
 import { faCss3Alt, faJs, faBootstrap, faWordpressSimple, faNodeJs } from '@fortawesome/free-brands-svg-icons'
 import Layout from "../components/layout"
+import Header from "../components/header"
 import SEO from "../components/seo"
 
 
 const AboutMePage = ({
   data
 }) => {
-  const headerImage = data.mat.childImageSharp.fluid;
   const astronaut = data.family.childImageSharp.fluid;
   const cashQuote = data.cash.childImageSharp.fluid;
   // console.log(headerImage);
@@ -21,19 +21,7 @@ const AboutMePage = ({
   return (
   <Layout pageInfo={{ pageName: "About Me" }}>
   <SEO title="About Me" />
-  <Container className="about-me py-sm-5">
-    <Row className="border align-items-center py-3 p-sm-5 position-relative h-100 justify-content-center justify-content-sm-between about-spotlight">
-      <Col md={6} className="mb-4 mb-sm-0">
-        <div>
-          <h1>Hi, I'm Mat!</h1>
-          <p className="mb-0">Full-time marketer &amp;<br/>web development enthusiast</p>
-        </div>
-      </Col>
-      <Col md={6}>
-        <Img fluid={headerImage} alt="test" className="about-me-headphoto" />
-      </Col>
-    </Row>
-  </Container>
+  <Header/>
 
   <Container className="about-me-section">
     <Row>
@@ -112,13 +100,6 @@ const AboutMePage = ({
 export default AboutMePage
 
 export const imageQuery = graphql`query getImages {
-  mat: file(relativePath: { eq: "mateus.jpg" }) {
-    childImageSharp {
-      fluid(maxWidth: 317) {
-        ...GatsbyImageSharpFluid
-      }
-    }
-  }
   cash: file(relativePath: { eq: "johnny-cash-too-long.jpg" }) {
     childImageSharp {
       fluid(maxWidth: 738) {
