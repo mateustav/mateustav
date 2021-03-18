@@ -5,7 +5,6 @@ import { Container, Navbar, Nav } from "react-bootstrap"
 
 const CustomNavbar = ({ pageInfo }) => {
   return (
-    <>
       <Navbar expand="sm" id="primary-navbar" className="py-4 mb-5">
         <Container className="container-sm">
           <Link to="/" className="link-no-style">
@@ -43,7 +42,6 @@ const CustomNavbar = ({ pageInfo }) => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    </>
   )
 }
 
