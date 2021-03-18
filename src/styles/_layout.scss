@@ -84,6 +84,7 @@ h1 {
   }
   @include colour-tech-icons-on-hover("#html", #e34c26);
   @include colour-tech-icons-on-hover("#css", #3596d0);
+  @include colour-tech-icons-on-hover("#sass", #c69);
   @include colour-tech-icons-on-hover("#javascript", #f0db4f);
 
   .fa-square-full {
