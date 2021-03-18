@@ -3,7 +3,7 @@ featuredImage: ../images/wishpond-com.png
 link: "https://www.wishpond.com/"
 order: 1
 tech: ["docker", "wordpress"]
-title: "Wishpond.com"
+title: "Wishpond"
 ---
 
 Since 2015, I've been in charge of Wishpond's marketing site including its style, theming, style, deploy and more.
