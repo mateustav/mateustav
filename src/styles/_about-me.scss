@@ -1,36 +1,23 @@
-.about-me {
-  .about-spotlight {
-    border: .25rem solid $grey-light !important;
-
-    @include media-breakpoint-down(sm) {
-      border: 0 !important;
-    }
-
-    p {
-      line-height: 1.25;
-      @include media-breakpoint-down(sm) {
-        font-size: .75rem;
-      }
-    }
-  }
-}
-.about-me-headphoto {
-  @include media-breakpoint-up(sm) { margin-bottom: -10rem; }
-}
+// .about-me-headphoto {
+//   @include media-breakpoint-up(sm) { margin-bottom: -10rem; }
+// }
 
 .about-me-section {
   padding-top: 4rem;
 
-  @include media-breakpoint-up(sm) { padding-top: 10rem; }
+  @include media-breakpoint-up(sm) {
+    padding-top: 10rem;
+  }
 
   img,
-  .gatsby-image-wrapper  {
+  .gatsby-image-wrapper {
     display: block;
     line-height: 1.6;
     margin: 0 auto 2.75rem;
   }
 
-  ul, p {
+  ul,
+  p {
     font-size: 1.22rem;
     // font-weight: 300;
     line-height: 1.6;
@@ -39,8 +26,8 @@
   }
 
   svg {
-    color: $grey-dark;
-    transition: all .1s ease-in-out;
+    color: $grey-light;
+    transition: all 0.1s ease-in-out;
     filter: drop-shadow(0px 2px 1px $grey-light);
 
     &:hover {
@@ -49,132 +36,132 @@
     }
   }
 
-  @include colour-tech-icons-on-hover('#css', #3596d0);
-  @include colour-tech-icons-on-hover('#javascript', #f0db4f);
+  @include colour-tech-icons-on-hover("#css", #3596d0);
+  @include colour-tech-icons-on-hover("#javascript", #f0db4f);
 
-.fa-square-full {
-  opacity: 0;
-}
-
-#tech-icons #javascript:hover {
-  + .fa-square-full {
-    opacity: 1;
-    transform: scale(1.1);
+  .fa-square-full {
+    opacity: 0;
   }
-}
 
-@include colour-tech-icons-on-hover('#bootstrap', #602c50);
-@include colour-tech-icons-on-hover('#wordpress', #00749c);
-@include colour-tech-icons-on-hover('#gatsby', #663399);
-@include colour-tech-icons-on-hover('#nodejs', #68a063);
+  #tech-icons #javascript:hover {
+    + .fa-square-full {
+      color: $grey-dark;
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
 
-.tech-name {
-  margin-top: 0;
-  margin-bottom: 0;
-  left: 50%;
-  top: 50%;
-  //transition: opacity .2s linear;
-  transform: translateX(-50%) translateY(-50%);
-  opacity: 0;
-  z-index: -1;
-}
+  @include colour-tech-icons-on-hover("#bootstrap", #602c50);
+  @include colour-tech-icons-on-hover("#wordpress", #00749c);
+  @include colour-tech-icons-on-hover("#gatsby", #663399);
+  @include colour-tech-icons-on-hover("#nodejs", #68a063);
 
-svg:hover {
-
-  ~ .tech-name {
-    transform: translateX(-50%) translateY(200%);
-    opacity: 1;
+  .tech-name {
+    margin-top: 0;
+    margin-bottom: 0;
+    left: 50%;
+    top: 50%;
+    //transition: opacity .2s linear;
+    transform: translateX(-50%) translateY(-50%);
+    opacity: 0;
     z-index: -1;
   }
-}
 
-/* Add this attribute to the element that needs a tooltip */
-[data-tooltip] {
-  position: relative;
-  z-index: 2;
-}
+  svg:hover {
+    ~ .tech-name {
+      transform: translateX(-50%) translateY(200%);
+      opacity: 1;
+      z-index: -1;
+    }
+  }
 
-/* Hide the tooltip content by default */
-[data-tooltip]:before,
-[data-tooltip]:after {
-  visibility: hidden;
-  //-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  //filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
-  opacity: 0;
-  transition: all .2s ease-out;
-  pointer-events: none;
-}
+  /* Add this attribute to the element that needs a tooltip */
+  [data-tooltip] {
+    position: relative;
+    z-index: 2;
+  }
 
-/* Position tooltip above the element */
-[data-tooltip]:before {
-  position: absolute;
-  bottom: 110%;
-  left: 50%;
-  margin-bottom: 5px;
-  margin-left: -80px;
-  padding: 7px;
-  width: 160px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  color: #fff;
-  content: attr(data-tooltip);
-  text-align: center;
-  font-size: 14px;
-  line-height: 1.2;
-}
+  /* Hide the tooltip content by default */
+  [data-tooltip]:before,
+  [data-tooltip]:after {
+    visibility: hidden;
+    //-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    //filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    transition: all 0.2s ease-out;
+    pointer-events: none;
+  }
 
-/* Triangle hack to make tooltip look like a speech bubble */
-[data-tooltip]:after {
-  position: absolute;
-  bottom: 110%;
-  left: 50%;
-  margin-left: -5px;
-  width: 0;
-  border-top: 5px solid #000;
-  border-top: 5px solid hsla(0, 0%, 20%, 0.9);
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
-  content: " ";
-  font-size: 0;
-  line-height: 0;
-}
+  /* Position tooltip above the element */
+  [data-tooltip]:before {
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    margin-bottom: 5px;
+    margin-left: -80px;
+    padding: 7px;
+    width: 160px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: #fff;
+    content: attr(data-tooltip);
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.2;
+  }
 
-/* Show tooltip content on hover */
-[data-tooltip]:hover:before,
-[data-tooltip]:hover:after {
-  visibility: visible;
-  //-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-  //filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
-  opacity: 1;
-}
+  /* Triangle hack to make tooltip look like a speech bubble */
+  [data-tooltip]:after {
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    margin-left: -5px;
+    width: 0;
+    border-top: 5px solid #000;
+    border-top: 5px solid hsla(0, 0%, 20%, 0.9);
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    content: " ";
+    font-size: 0;
+    line-height: 0;
+  }
 
-    // #css {
-    //   color: #3596d0;
-    // }
+  /* Show tooltip content on hover */
+  [data-tooltip]:hover:before,
+  [data-tooltip]:hover:after {
+    visibility: visible;
+    //-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    //filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+  }
 
-    // #javascript {
-    //   color: #f0db4f;
+  // #css {
+  //   color: #3596d0;
+  // }
 
-    //   + .fa-square-full {
-    //     opacity: 1;
-    //     transform: scale(1.1);
-    //   }
-    // }
+  // #javascript {
+  //   color: #f0db4f;
 
-    // #bootstrap {
-    //   color: #602c50;
-    // }
+  //   + .fa-square-full {
+  //     opacity: 1;
+  //     transform: scale(1.1);
+  //   }
+  // }
 
-    // #wordpress {
-    //   color: #00749c;
-    // }
+  // #bootstrap {
+  //   color: #602c50;
+  // }
 
-    // #gatsby {
-    //   color: #663399;
-    // }
+  // #wordpress {
+  //   color: #00749c;
+  // }
 
-    // #nodejs {
-    //   color: #68a063;
-    // }
+  // #gatsby {
+  //   color: #663399;
+  // }
+
+  // #nodejs {
+  //   color: #68a063;
+  // }
 }
