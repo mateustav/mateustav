@@ -24,7 +24,7 @@ const Header = () => (
                 <Col sm={8} className="mb-4 mb-sm-0">
                   <div>
                     <h1 className="font-weight-lighter">Hi, I'm <span className="font-weight-bold">Mat</span>!</h1>
-                    <p className="mb-0 font-weight-bold">I'm a Full-Stack Developer based in Vancouver. 🇨🇦</p>
+                    <p className="mb-0 font-weight-bold">I'm a Full-Stack Developer based in Vancouver. <span role="img">🇨🇦</span></p>
                   </div>
                 </Col>
                 <Col sm={4} className="align-self-end">
