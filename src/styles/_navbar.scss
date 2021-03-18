@@ -1,7 +1,3 @@
-.navbar-brand {
-  color: $grey-dark;
-}
-
 #navbar-nav {
   .btn {
     background-color: $grey-dark;
@@ -10,6 +6,43 @@
     &:hover {
       background-color: $grey-med;
       border-color: $grey-med;
+    }
+  }
+}
+
+.navbar-light {
+
+  .navbar-brand {
+    color: $grey-dark;
+    font-size: 1.25rem;
+  }
+
+  .navbar-nav {
+
+    .nav-link {
+      color: $grey-dark;
+    }
+  }
+
+  .link-no-style {
+    //disable original focus style
+    &:focus,
+    &:hover {
+      text-decoration: none;
+    }
+
+    &.active {
+      span {
+        position: relative;
+
+        @include media-breakpoint-up(sm) {
+          &::after {
+            @include link-text-decoration;
+            visibility: visible;
+            transform: scaleX(.75);
+          }
+        }
+      }
     }
   }
 }
