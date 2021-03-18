@@ -27,7 +27,7 @@ const Header = () => (
                     <p className="mb-0 font-weight-bold">I'm a Full-Stack Developer based in Vancouver. <span role="img">🇨🇦</span></p>
                   </div>
                 </Col>
-                <Col sm={4} className="align-self-end">
+                <Col xs={8} sm={4} className="align-self-end">
                   <Img fluid={data.mat.childImageSharp.fluid} alt="mat" className="about-me-headphoto" />
                 </Col>
               </Row>
