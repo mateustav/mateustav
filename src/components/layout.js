@@ -30,13 +30,7 @@ const Layout = ({ children, pageInfo }) => (
     render={data => (
       <>
         <Navbar pageInfo={pageInfo} />
-        <Container>
-          <Row>
-            <Col>
-              <main>{children}</main>
-            </Col>
-          </Row>
-        </Container>
+        <main>{children}</main>
         <Container>
           <Row className="justify-content-center my-5">
             <Col>
