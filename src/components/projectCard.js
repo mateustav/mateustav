@@ -23,7 +23,7 @@ const ProjectCard = (props) => {
         <Img fluid={fluid} alt={title} />
         <Card.Title className="position-absolute text-white">{title}</Card.Title>
       </Card.Header>
-      <Card.Body className="d-flex h-100 flex-column justify-content-between">    
+      <Card.Body className="d-flex h-100 flex-column justify-content-between font-weight-lighter">    
         <div dangerouslySetInnerHTML={{ __html: description }}></div>
       </Card.Body>
       <Card.Footer className="bg-white d-flex justify-content-end">
