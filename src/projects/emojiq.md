@@ -1,5 +1,6 @@
 ---
 featuredImage: ../images/emojiq.png
+github: "https://github.com/mateustav/Emojiq"
 link: "https://emojiq-p4i3e.ondigitalocean.app/"
 order: 3
 tech: ["digitalocean", "node", "react"]
