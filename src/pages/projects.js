@@ -15,8 +15,8 @@ const Projects = ({
 
   <Container className="projects-list">
     <Row className="justify-content-center">
-      <Col xs={12}>
-        <h1>Stuff I've Worked on</h1>
+      <Col xs={12} className="mb-4">
+        <h1 className="font-weight-bold">Jobs and Projects</h1>
       </Col>
       {projectNodes.map(({node}) => {
         const { html, id }  = node;
