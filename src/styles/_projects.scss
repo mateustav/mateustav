@@ -1,4 +1,10 @@
 .projects-list {
+  h1 {
+    line-height: 1.25;
+    // @include media-breakpoint-down(sm) { font-size: 0.75rem; }
+    @include media-breakpoint-up(xs) { font-size: 1.15rem; }
+    @include media-breakpoint-up(md) { font-size: 3.5rem; }
+  }
 
   .card {
     /*border-radius: 30px;*/
@@ -60,6 +66,8 @@
   overflow: hidden;
 }
 
-.collapsing {
-  height: 7em;
+.card-body {
+  .collapsing {
+    height: 7em;
+  }
 }
