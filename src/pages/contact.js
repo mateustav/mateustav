@@ -18,7 +18,7 @@ const ContactPage = () => (
               <Col md={7}>
                 <Form.Group controlId="name" className="pt-3">
                   <Form.Label>Name</Form.Label>
-                  <Form.Control type="password" placeholder="Johnny Cash" />
+                  <Form.Control type="text" placeholder="Johnny Cash" />
                 </Form.Group>
                 <Form.Group controlId="email" className="py-3">
                   <Form.Label>Email address</Form.Label>
