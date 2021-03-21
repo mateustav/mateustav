@@ -11,15 +11,15 @@ const ContactForm = () => {
         <Col md={7}>
           <Form.Group controlId="name" className="pt-3">
             <Form.Label>Name</Form.Label>
-            <Form.Control type="text" placeholder="Johnny Cash" />
+            <Form.Control type="text" placeholder="Johnny Cash" required />
           </Form.Group>
           <Form.Group controlId="email" className="py-3">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="johnny@maninblack.com" />
+            <Form.Control type="email" placeholder="johnny@maninblack.com" required />
           </Form.Group>
           <Form.Group controlId="message" className="pb-3">
             <Form.Label>Your Message</Form.Label>
-            <Form.Control as="textarea" rows="5" placeholder="Hello, I'm Johnny Cash..." /*placeholder="I keep a close watch on this heart of mine&#10;I keep my eyes wide open all the time..."*/ />
+            <Form.Control as="textarea" rows="5" placeholder="Hello, I'm Johnny Cash..." /*placeholder="I keep a close watch on this heart of mine&#10;I keep my eyes wide open all the time..."*/ required />
           </Form.Group>
           <Button variant="dark" type="submit" className="rounded-0 px-sm-4">
             <FontAwesomeIcon icon={faPaperPlane} className="mr-2"/> Send
