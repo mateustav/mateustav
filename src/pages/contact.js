@@ -1,5 +1,4 @@
 import React from "react"
-// import { Link } from "gatsby"
 import { Container, Row, Col, Form, Button } from "react-bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/pro-duotone-svg-icons'
@@ -14,7 +13,7 @@ const ContactPage = () => (
       <Row>
         <Col>
           <h1 className="px-3 px-sm-0">Reach out!</h1>
-          <Form className="contact-form">
+          <Form name="Contact Form  " className="contact-form" method="POST" data-netlify="true">
             <Row className="px-3 px-sm-0">
               <Col md={7}>
                 <Form.Group controlId="name" className="pt-3">
