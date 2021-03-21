@@ -25,7 +25,7 @@ const ContactForm = () => {
           <Button variant="dark" type="submit" className="rounded-0 px-sm-4">
             <FontAwesomeIcon icon={faPaperPlane} className="mr-2"/> Send
           </Button>
-          <div class="submission-status mt-3"><FontAwesomeIcon icon={faSpinner} spin /> <span className="pl-2">Sending...</span>
+          <div className="submission-status mt-3"><FontAwesomeIcon icon={faSpinner} spin /> <span className="pl-2">Sending...</span>
           </div>
         </Col>
       </Row>
