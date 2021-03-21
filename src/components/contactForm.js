@@ -1,12 +1,13 @@
-import React, { useState } from "react"
+import React, { useRef } from "react"
 import { Button, Form, Row, Col } from "react-bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane, faSpinner } from '@fortawesome/pro-duotone-svg-icons'
 
 const ContactForm = () => {
-  
+  const form = useRef(null);
+
   return (
-    <Form name="Contact Form" className="contact-form" method="POST" data-netlify="true">
+    <Form name="Contact Form" className="contact-form" method="POST" data-netlify="true" ref={form}>
       <Row className="px-3 px-sm-0">
         <Col md={7}>
           <Form.Group controlId="name" className="pt-3">
