@@ -1,7 +1,7 @@
 import React from "react"
 import { Container, Row, Col, Form, Button } from "react-bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPaperPlane } from '@fortawesome/pro-duotone-svg-icons'
+import { faPaperPlane, faSpinner } from '@fortawesome/pro-duotone-svg-icons'
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -31,6 +31,8 @@ const ContactPage = () => (
                 <Button variant="dark" type="submit" className="rounded-0 px-sm-4">
                   <FontAwesomeIcon icon={faPaperPlane} className="mr-2"/> Send
                 </Button>
+                <div class="submission-status mt-3"><FontAwesomeIcon icon={faSpinner} spin /> <span className="pl-2">Sending...</span>
+</div>
               </Col>
             </Row>
           </Form>
