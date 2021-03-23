@@ -68,7 +68,7 @@ const ContactForm = () => {
     <Form name="Contact Form" className="contact-form" method="POST" data-netlify="true" ref={form} onSubmit={e => handleSubmit(e)}>
       <Row className="px-3 px-sm-0">
         <Col md={7}>
-          <Form.Control type="hidden" value="Contact Form"></Form.Control>
+        <input type="hidden" name="form-name" value="Contact Form" />
           <Form.Group controlId="name" className="pt-3">
             <Form.Label>Name</Form.Label>
             <Form.Control name="name" type="text" placeholder="Johnny Cash" ref={name} onFocus={e => handleFocus(e)} required />
