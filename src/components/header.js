@@ -6,7 +6,7 @@ import Img from "gatsby-image"
 const Header = () => (
   <StaticQuery
     query={graphql`query getHeaderImage {
-      mat: file(relativePath: { eq: "16-bit-icon.png" }) {
+      mat: file(relativePath: { eq: "icon.png" }) {
         childImageSharp {
           fluid(maxWidth: 317) {
             ...GatsbyImageSharpFluid

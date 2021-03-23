@@ -80,11 +80,12 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        icon: 'src/images/16-bit-icon.png',
+        icon: 'src/images/icon.png',
         name: `Mateus Tavares personal site`,
         short_name: `Mat Tavares`,
         start_url: `/`,
         background_color: `#fff`,
+        theme_color: `#393939`, 
         theme_color_in_head: false,
         display: `minimal-ui`,
       },
