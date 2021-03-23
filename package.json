@@ -13,7 +13,6 @@
     "@fortawesome/pro-solid-svg-icons": "file:fontawesomepro/fortawesome-pro-solid-svg-icons-5.15.2.tgz",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "axios": "^0.21.1",
-    "babel-plugin-styled-components": "^1.10.7",
     "bootstrap": "^4.5.0",
     "gatsby": "^2.21.36",
     "gatsby-image": "^2.4.4",
@@ -24,7 +23,6 @@
     "gatsby-plugin-react-helmet": "^3.3.1",
     "gatsby-plugin-sass": "^2.3.1",
     "gatsby-plugin-sharp": "^2.14.3",
-    "gatsby-plugin-styled-components": "^3.3.2",
     "gatsby-plugin-webfonts": "^1.1.4",
     "gatsby-remark-images": "^3.3.4",
     "gatsby-source-filesystem": "^2.3.4",
@@ -37,8 +35,7 @@
     "react-bootstrap": "^1.4.3",
     "react-dom": "^16.8.6",
     "react-helmet": "6.0.0",
-    "sharp": "^0.27.2",
-    "styled-components": "^5.1.1"
+    "sharp": "^0.27.2"
   },
   "devDependencies": {
     "gh-pages": "^2.0.1",
