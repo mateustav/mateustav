@@ -28,11 +28,11 @@ const CustomNavbar = ({ pageInfo }) => {
                   Projects
                 </Nav.Link>
               </Link>
-              <Link to="/about-me/" className="link-no-style" activeClassName="active">
+              {/*<Link to="/about-me/" className="link-no-style" activeClassName="active">
                 <Nav.Link as="span" eventKey="about-me" className="px-sm-3">
                   About
                 </Nav.Link>
-              </Link>
+            </Link>*/}
               <Link to="/contact/" className="btn btn-dark d-flex d-sm-inline-block align-self-start ml-sm-2 rounded-0" activeClassName="active">
                 <Nav.Link as="span" eventKey="contact" className="py-0 px-sm-3 text-white">
                   Contact
