@@ -6,20 +6,20 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: `gatsby-plugin-google-gtag`,
       options: {
-        // The property ID; the tracking code won't be generated without it
-        trackingId: "UA-169050768-1",
-        // Defines where to place the tracking script - `true` in the head and `false` in the body
-        head: true,
-        respectDNT: true,
-        // Delays sending pageview hits on route update (in milliseconds)
-        pageTransitionDelay: 0,
-        defer: false,
-        // Any additional optional fields
-        sampleRate: 5,
-        siteSpeedSampleRate: 10,
-        cookieDomain: "mateustavares.me",
+        trackingIds: [
+          "G-1XE9R363F9",
+        ],
+        gtagConfig: {
+          anonymize_ip: true,
+          cookie_expires: 0,
+        },
+        pluginConfig: {
+          head: true,
+          respectDNT: true,
+          exclude: ["/preview/**"],
+        },
       },
     },
     {

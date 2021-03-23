@@ -10,7 +10,7 @@ import { StaticQuery, graphql } from "gatsby"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/pro-duotone-svg-icons'
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons'
-import { OutboundLink } from "gatsby-plugin-google-analytics"
+import { OutboundLink } from "gatsby-plugin-google-gtag"
 
 import { Container, Row, Col } from "react-bootstrap"
 import Navbar from "./navBar"

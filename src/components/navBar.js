@@ -8,7 +8,7 @@ const CustomNavbar = ({ pageInfo }) => {
       <Navbar expand="sm" id="primary-navbar" className="py-4 mb-5">
         <Container className="container-sm">
           <Link to="/" className="link-no-style">
-            <Navbar.Brand as="span" className="py-2 mr-0">Mat Tavares</Navbar.Brand>
+            <Navbar.Brand as="span" className="py-2 mr-0">matttt.ca</Navbar.Brand>
           </Link>
           <Navbar.Toggle aria-controls="navbar-nav" />
           <Navbar.Collapse id="navbar-nav">
