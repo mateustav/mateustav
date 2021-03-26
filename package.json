@@ -38,6 +38,7 @@
     "sharp": "^0.27.2"
   },
   "devDependencies": {
+    "@netlify/plugin-sitemap": "^0.8.0",
     "gh-pages": "^2.0.1",
     "prettier": "2.0.5"
   },

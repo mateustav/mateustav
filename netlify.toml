@@ -1,0 +1,15 @@
+[[plugins]]
+package = "@netlify/plugin-sitemap"
+
+[plugins.inputs]
+buildDir = "public"
+exclude = [
+  '404',
+  '/404',
+  '/404.html',
+  './400',
+  './400.html',
+  '**/404.html',
+  '**/404',
+]
+trailingSlash = true
