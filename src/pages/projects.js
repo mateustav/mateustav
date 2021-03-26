@@ -52,7 +52,7 @@ export const projectsQuery = graphql`query posts {
           title
           featuredImage {
             childImageSharp {
-              fluid(maxWidth: 992) {
+              fluid(maxWidth: 700) {
                 ...GatsbyImageSharpFluid
               }
             }
