@@ -15,8 +15,8 @@ One of the biggest pain points of the website was that it wasn't as performative
 Technology used:
 
 - Docker
-- Continuous deployment via GitHub
-- PHP 7.2
+- Github Deployment
+- PHP
 - WordPress
 - Sass
 - Bootstrap 4

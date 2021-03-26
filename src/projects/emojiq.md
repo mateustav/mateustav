@@ -12,7 +12,7 @@ Built in 2021, this Slack bot turn Slack messages emojis when it finds a match. 
 Technology used:
 
 - DigitalOcean App Platform
-- Continuous deployment via GitHub
+- Github Deployment
 - Node.js
 - Express
 - React

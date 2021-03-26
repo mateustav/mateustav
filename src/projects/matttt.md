@@ -12,7 +12,7 @@ The site you're seeing right now! As soon as I heard about this static site gene
 Technology used:
 
 - Netlify
-- Continuous deployment via GitHub
+- Github Deployment
 - Gatsby.js
 - React Boostrap
 - FontAwesome 5 Pro

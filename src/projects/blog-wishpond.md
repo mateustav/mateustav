@@ -13,7 +13,7 @@ The blog still makes use of Bootstrap 3 to maximize its reach to every possible 
 Technology used:
 
 - Docker
-- Continuous deployment via GitHub
+- Github Deployment
 - Node.js
 - Express
 - Ghost
