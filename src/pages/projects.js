@@ -22,7 +22,7 @@ const Projects = ({
         const { html, id }  = node;
         const { featuredImage, github, link, tech, title } = node.frontmatter;
         return (
-          <Col sm={6} lg={4} className="my-4">
+          <Col md={6} lg={12} className="my-4">
             <ProjectCard description={html} key={id} image={featuredImage} link={link} tech={tech} github={github} title={title} />
           </Col>
         )
