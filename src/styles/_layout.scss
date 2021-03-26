@@ -1,13 +1,14 @@
 :root {
-  --font-family-sans-serif: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", , "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-sans-serif: Roboto, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", , "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 body {
-  font-family: 'Roboto', monospace, sans-serif;
+  font-family: "Roboto", monospace, sans-serif;
   -webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale;
 }
-
 
 // @media(min-width: map-get($grid-breakpoints, "md")) {
 //   // .container {
@@ -16,11 +17,26 @@ body {
 // }
 
 h1 {
-  font-size: 1.25rem;
-  font-weight: 400;
+  &:not(.home-headline) {
+    line-height: 1.25;
+    @include media-breakpoint-up(xs) {
+      font-size: 1.15rem;
+    }
+    @include media-breakpoint-up(md) {
+      font-size: 3.5rem;
+    }
+  }
 
-  @include media-breakpoint-up(sm) { font-size: 1.5rem; }
-  @include media-breakpoint-up(md) { font-size: 1.75rem; }
+  &.home-headline {
+    font-size: 1.25rem;
+    font-weight: 400;
+    @include media-breakpoint-up(sm) {
+      font-size: 1.5rem;
+    }
+    @include media-breakpoint-up(md) {
+      font-size: 1.75rem;
+    }
+  }
 }
 
 .header-card {
@@ -33,8 +49,12 @@ h1 {
   p {
     line-height: 1.25;
     // @include media-breakpoint-down(sm) { font-size: 0.75rem; }
-    @include media-breakpoint-up(xs) { font-size: 1.15rem; }
-    @include media-breakpoint-up(md) { font-size: 4rem; }
+    @include media-breakpoint-up(xs) {
+      font-size: 1.15rem;
+    }
+    @include media-breakpoint-up(md) {
+      font-size: 4rem;
+    }
   }
 }
 
@@ -49,14 +69,12 @@ h1 {
 }
 
 .blog-listing {
-
   .excerpt {
-    letter-spacing: .02rem;
+    letter-spacing: 0.02rem;
     line-height: 1.55;
   }
 
   .read-more {
-
     &::after {
       @extend %link-text-decoration;
       visibility: hidden;

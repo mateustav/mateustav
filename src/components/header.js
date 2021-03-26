@@ -23,7 +23,7 @@ const Header = () => (
               <Row className="align-items-start align-items-md-center pt-5 pt-sm-4 pt-lg-0 px-3 px-sm-5 position-relative h-100 justify-content-center justify-content-sm-between">
                 <Col sm={8} className="mb-4 mb-sm-0">
                   <div>
-                    <h1 className="font-weight-lighter">Hi, I'm <span className="font-weight-bold">Mat</span>!</h1>
+                    <h1 className="font-weight-lighter home-headline">Hi, I'm <span className="font-weight-bold">Mat</span>!</h1>
                     <p className="mb-0 font-weight-bold">I'm a Full-Stack Developer based in Vancouver. <span role="img">🇨🇦</span></p>
                   </div>
                 </Col>

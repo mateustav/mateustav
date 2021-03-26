@@ -11,7 +11,7 @@ const ContactPage = () => (
     <Container className="contact">
       <Row>
         <Col>
-          <h1 className="px-3 px-sm-0">Reach out!</h1>
+          <h1 className="px-3 px-sm-0 font-weight-bold">Reach out!</h1>
           <ContactForm />
         </Col>
       </Row>
