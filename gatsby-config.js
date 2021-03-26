@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   pathPrefix: "/gatsby-react-bootstrap-starter",
   siteMetadata: {
@@ -74,6 +78,13 @@ module.exports = {
             }
           ]
         },
+      },
+    },
+    {
+      resolve: 'gatsby-source-giphy-random',
+      options: {
+        api_key: process.env.GATSBY_GIPHY_API_KEY,
+        rating: 'PG-13',
       },
     },
     {
