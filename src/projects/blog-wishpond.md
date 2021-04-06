@@ -6,17 +6,15 @@ tech: ["docker", "ghost"]
 title: "Wishpond Blog"
 ---
 
-Also since 2015, I've been the sole maintainer of the Wishpond blog. This blog is a result of a successful migration from Tumblr. Wishpond wanted a modern blogging platform that had a good balance between performance and flexibility. Ghost seemed like a good fit so I moved all the content in, and customized the platform's default URL structure inside its core to successfully keep the domain's SEO during the transition.
-
-The blog still makes use of Bootstrap 3 to maximize its reach to every possible visitor, no matter which browser they come from.
+I've been the sole maintainer of the Wishpond blog since 2015 when I led the project to migrate the contents and assets of the blog from Tumblr to a self-hosted version of the Ghost platform. The transfer involved making sure the entire MySQL database migration was properly completed with the URL structure and site schema remaining the same for SEO purposes while the layout was rewritten in Handlebars.
 
 Technology used:
 
-- Docker
-- Github Deployment
-- Node.js
-- Express
-- Ghost
-- Handlebars
-- Sass
 - Bootstrap 3
+- Docker
+- Express
+- Google AMP
+- Github Deployment
+- Handlebars
+- Node.js
+- Sass

@@ -7,12 +7,12 @@ tech: ["digitalocean", "node", "react"]
 title: "Matttt.ca"
 ---
 
-The site you're seeing right now! As soon as I heard about this static site generator powered by React, I knew that would've been the core of the tech stack. Gatsby allowed me to create this crazy fast site while let me expand it with the plugins (and still keeping its excellent performance).
+The site you're seeing right now! As soon as I heard about this static site generator powered by React, I knew it would become the core of my tech stack. The Gatsby framework allowed me to create this crazy fast site and expand it with plugins (while keeping its performance excellent).
 
 Technology used:
 
 - Netlify
 - Github Deployment
 - Gatsby.js
-- React Boostrap
 - FontAwesome 5 Pro
+- React Boostrap

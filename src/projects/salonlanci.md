@@ -6,11 +6,12 @@ tech: ["wp composer", "wordpress"]
 title: "Salon Lanci"
 ---
 
-Client wanted to replace its site with a more modern and responsive one. I used WordPress to build 5 pages and give the website a modern touch with the company colour scheme and using best practices for the industry.
+A website overhaul for a local salon. The client wanted to replace their entire site with a more modern and responsive design that was also fast and easy enough to personalize. The website makes use of a client-side caching system for increased performance.
 
 Technology used:
 
-- WordPress
-- Visual Composer
+- Flexbox
 - Google Maps API
 - Nginx
+- Visual Composer
+- WordPress

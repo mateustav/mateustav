@@ -6,11 +6,9 @@ tech: ["docker", "wordpress"]
 title: "Wishpond"
 ---
 
-Since 2015, I've been in charge of Wishpond's marketing site including its style, theming, style, deploy and more.
+I have been the sole maintainer of the Wishpond marketing website since 2015 when I created the WordPress theme, which has been used as the base for every redesign.
 
-I have also planned, implemented and managed more than 700+ A/B tests using jQuery and modern Javascript syntax as well as ran quality assurance protocols to verify these experiments worked as intended.
-
-One of the biggest pain points of the website was that it wasn't as performative as it could have been. I rebuilt the entire website theme to make sure
+Since then, I have planned, implemented and managed more than 700 optimization experiments at every level of complexity and have optimized website performance through server and client-side caching, assets minification and lazy loading.
 
 Technology used:
 

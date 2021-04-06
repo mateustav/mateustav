@@ -7,13 +7,13 @@ tech: ["digitalocean", "node", "react"]
 title: "Emojiq"
 ---
 
-Built in 2021, this Slack bot turn Slack messages emojis when it finds a match. I chose to use Node.js as I wanted to try out object-oriented programming techniques through modern Javascript syntax (JS classes) as well as try out PostgreSQL for the first time (it's so powerful!)
+Emojiq is a Slackbot that turns messages into emojis using modern JavaScript syntax in Node.js, including Promises and Fetch API, as well as Object-Oriented Design Patterns (OOP).
 
 Technology used:
 
 - DigitalOcean App Platform
+- Express
 - Github Deployment
 - Node.js
-- Express
 - React
 - Slack API
