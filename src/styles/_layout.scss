@@ -104,6 +104,17 @@ h1 {
   @include colour-tech-icons-on-hover("#css", #3596d0);
   @include colour-tech-icons-on-hover("#sass", #c69);
   @include colour-tech-icons-on-hover("#javascript", #f0db4f);
+  @include colour-tech-icons-on-hover("#graphql", #e535ab);
+
+  #graphql {
+    color: $grey-light;
+    opacity: 0.4;
+    max-width: 85px;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 
   .fa-square-full {
     opacity: 0;
