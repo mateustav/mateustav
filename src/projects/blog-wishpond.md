@@ -6,7 +6,7 @@ tech: ["docker", "ghost"]
 title: "Wishpond Blog"
 ---
 
-I've been the sole maintainer of the Wishpond blog since 2015 when I led the project to migrate the contents and assets of the blog from Tumblr to a self-hosted version of the Ghost platform. The transfer involved making sure the entire MySQL database migration was properly completed with the URL structure and site schema remaining the same for SEO purposes while the layout was rewritten in Handlebars.
+I have been the sole maintainer of the Wishpond blog since 2015 when I led the project to migrate the contents and assets of the blog from Tumblr to a self-hosted version of the Ghost platform. The transfer involved making sure the entire MySQL database migration was properly completed with the URL structure and site schema remaining the same for SEO purposes while the layout was rewritten in Handlebars.
 
 Technology used:
 
