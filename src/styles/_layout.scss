@@ -105,6 +105,7 @@ h1 {
   @include colour-tech-icons-on-hover("#sass", #c69);
   @include colour-tech-icons-on-hover("#javascript", #f0db4f);
   @include colour-tech-icons-on-hover("#graphql", #e535ab);
+  @include colour-tech-icons-on-hover("#react", #61dbfd);
 
   #graphql {
     color: $grey-light;
