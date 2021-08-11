@@ -2,7 +2,7 @@
 
 I'm Mat (short for Mateus), a full-stack developer and a digital marketer from Vancouver, Canada. 🇨🇦
 
-I currently work at [Coinsquare](https://www.coinsquare.com/) as a front end developer/marketing solutions engineer.
+I currently work at [Dooly](https://www.dooly.ai/) as a front end developer/marketing solutions engineer.
 
 ## My tech stack
 
