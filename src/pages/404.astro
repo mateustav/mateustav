@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404: Page Not Found | Mateus Tavares">
+  <div class="not-found-page">
+    <div class="container text-center">
+      <h1 class="error-code">404</h1>
+      <h2 class="error-title">Page Not Found</h2>
+      <p class="error-desc">The page you're looking for doesn't exist or has been moved.</p>
+      
+      <a href="/" class="btn btn-primary">
+        &larr; Return to Home
+      </a>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .not-found-page {
+    padding: 6rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .error-code {
+    font-size: 6rem;
+    font-weight: 800;
+    color: #38bdf8;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .error-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .error-desc {
+    color: #94a3b8;
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+  }
+</style>

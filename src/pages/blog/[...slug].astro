@@ -1,0 +1,159 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Layout
+  title={`${post.data.title} | Mateus Tavares`}
+  description={post.body ? post.body.slice(0, 160) : post.data.title}
+>
+  <article class="post-single-page">
+    <div class="container container-readable">
+      <a href="/blog" class="back-link">
+        &larr; Back to all articles
+      </a>
+
+      <header class="post-header">
+        <div class="post-meta">
+          <time class="post-date">{formattedDate}</time>
+          {post.data.tag && <span class="badge">#{post.data.tag}</span>}
+        </div>
+
+        <h1 class="post-title">{post.data.title}</h1>
+      </header>
+
+      {post.data.featuredImage && (
+        <div class="featured-image-wrapper">
+          <Image
+            src={post.data.featuredImage}
+            alt={post.data.title}
+            width={800}
+            height={450}
+            class="featured-image"
+          />
+        </div>
+      )}
+
+      <div class="prose post-body">
+        <Content />
+      </div>
+
+      <div class="post-author-box">
+        <div class="author-details">
+          <h3>Written by Mateus Tavares</h3>
+          <p>Full-Stack Developer based in Vancouver, BC. Passionate about modern web performance, growth engineering, and software design.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .post-single-page {
+    padding: 3.5rem 0 5rem 0;
+  }
+
+  .container-readable {
+    max-width: 760px;
+  }
+
+  .back-link {
+    display: inline-block;
+    color: #94a3b8;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: #38bdf8;
+  }
+
+  .post-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-date {
+    font-size: 0.875rem;
+    color: #64748b;
+  }
+
+  .post-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.25;
+    color: #f8fafc;
+  }
+
+  @media (max-width: 640px) {
+    .post-title {
+      font-size: 1.85rem;
+    }
+  }
+
+  .featured-image-wrapper {
+    margin-bottom: 2.5rem;
+    border-radius: 0.85rem;
+    overflow: hidden;
+    border: 1px solid #232d3f;
+  }
+
+  .featured-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .post-body {
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .post-author-box {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid #232d3f;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .author-details h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    color: #f8fafc;
+  }
+
+  .author-details p {
+    color: #94a3b8;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+</style>

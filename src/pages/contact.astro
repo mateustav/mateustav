@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+
+<Layout
+  title="Contact | Mateus Tavares"
+  description="Get in touch with Mateus Tavares for web development, collaboration, or consultation."
+>
+  <div class="contact-page">
+    <div class="container container-readable">
+      <div class="page-header">
+        <h1 class="page-title">Get in Touch</h1>
+        <p class="page-subtitle">
+          Have a question, project proposal, or just want to say hi? Drop me a message below.
+        </p>
+      </div>
+
+      <ContactForm />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .contact-page {
+    padding: 3.5rem 0 5rem 0;
+  }
+
+  .container-readable {
+    max-width: 640px;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .page-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-subtitle {
+    color: #94a3b8;
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+</style>

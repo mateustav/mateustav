@@ -1,0 +1,227 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const publishedPosts = allPosts
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const formattedPosts = publishedPosts.map((post) => ({
+  id: post.id,
+  title: post.data.title,
+  tag: post.data.tag ? `#${post.data.tag}` : null,
+  rawTag: post.data.tag ? post.data.tag.toLowerCase() : '',
+  formattedDate: new Date(post.data.date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }),
+  excerpt: (post.body || '').slice(0, 220).replace(/[#*`]/g, '') + '...',
+}));
+
+const allTags = Array.from(
+  new Set(publishedPosts.map((p) => p.data.tag).filter(Boolean))
+).sort();
+---
+
+<Layout
+  title="Blog & Articles | Mateus Tavares"
+  description="Articles and tutorials on full-stack web engineering, marketing technology, CRO, and digital tools."
+>
+  <div class="blog-page">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="page-title">Blog &amp; Articles</h1>
+        <p class="page-subtitle">
+          Insights on web development, digital marketing engineering, and software experiments.
+        </p>
+      </div>
+
+      {allTags.length > 0 && (
+        <div class="tag-filter-bar">
+          <span class="filter-label">Filter:</span>
+          <button class="tag-btn active" data-tag="all">All Posts ({publishedPosts.length})</button>
+          {allTags.map((tag) => (
+            <button class="tag-btn" data-tag={tag ? tag.toLowerCase() : ''}>
+              #{tag}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div class="posts-list">
+        {formattedPosts.map((post) => (
+          <article class="post-item" data-tag={post.rawTag}>
+            <div class="post-header-line">
+              <time class="post-date">{post.formattedDate}</time>
+              {post.tag && <span class="badge">{post.tag}</span>}
+            </div>
+
+            <h2 class="post-title">
+              <a href={`/blog/${post.id}`}>{post.title}</a>
+            </h2>
+
+            <p class="post-excerpt">{post.excerpt}</p>
+
+            <a href={`/blog/${post.id}`} class="read-link">
+              Read Article &rarr;
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const tagBtns = document.querySelectorAll('.tag-btn');
+  const postItems = document.querySelectorAll('.post-item');
+
+  tagBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      tagBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const selectedTag = btn.getAttribute('data-tag');
+
+      postItems.forEach((item) => {
+        const itemEl = item as HTMLElement;
+        const itemTag = itemEl.getAttribute('data-tag');
+
+        if (selectedTag === 'all' || itemTag === selectedTag) {
+          itemEl.style.display = 'block';
+        } else {
+          itemEl.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .blog-page {
+    padding: 3.5rem 0 5rem 0;
+  }
+
+  .page-header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 3rem auto;
+  }
+
+  .page-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-subtitle {
+    color: #94a3b8;
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .tag-filter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .filter-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #64748b;
+    margin-right: 0.5rem;
+  }
+
+  .tag-btn {
+    background-color: #151d2a;
+    color: #94a3b8;
+    border: 1px solid #232d3f;
+    padding: 0.4rem 0.85rem;
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .tag-btn:hover {
+    color: #f8fafc;
+    border-color: #38bdf8;
+  }
+
+  .tag-btn.active {
+    background-color: #0284c7;
+    color: #ffffff;
+    border-color: #0369a1;
+  }
+
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .post-item {
+    background-color: #151d2a;
+    border: 1px solid #232d3f;
+    border-radius: 0.85rem;
+    padding: 2rem;
+    transition: all 0.2s ease;
+  }
+
+  .post-item:hover {
+    border-color: #38bdf8;
+    background-color: #1c2638;
+  }
+
+  .post-header-line {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-date {
+    font-size: 0.8125rem;
+    color: #64748b;
+  }
+
+  .post-title {
+    font-size: 1.45rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-title a {
+    color: #f8fafc;
+    text-decoration: none;
+  }
+
+  .post-title a:hover {
+    color: #38bdf8;
+  }
+
+  .post-excerpt {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .read-link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #38bdf8;
+    display: inline-flex;
+    align-items: center;
+  }
+</style>

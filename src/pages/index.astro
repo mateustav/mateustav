@@ -1,0 +1,203 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TechStack from '../components/TechStack.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection, render } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const sortedProjects = allProjects.sort((a, b) => (a.data.order || 99) - (b.data.order || 99)).slice(0, 4);
+
+const renderedProjects = await Promise.all(
+  sortedProjects.map(async (project) => {
+    const { Content } = await render(project);
+    return {
+      title: project.data.title,
+      featuredImage: project.data.featuredImage,
+      tech: project.data.tech,
+      link: project.data.link,
+      github: project.data.github,
+      Content,
+    };
+  })
+);
+
+const allPosts = await getCollection('blog');
+const recentPosts = allPosts
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 3)
+  .map((post) => ({
+    id: post.id,
+    title: post.data.title,
+    tag: post.data.tag,
+    formattedDate: new Date(post.data.date).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    }),
+  }));
+---
+
+<Layout title="Mateus Tavares | Full-Stack Developer & Growth Specialist">
+  <Hero />
+  <TechStack />
+
+  <!-- Featured Projects Preview -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header-flex">
+        <div>
+          <h2 class="section-title">Featured Projects</h2>
+          <p class="section-subtitle">A selection of recent applications, platforms, and overhauls</p>
+        </div>
+        <a href="/projects" class="btn btn-secondary btn-sm">
+          View All Projects ({allProjects.length}) &rarr;
+        </a>
+      </div>
+
+      <div class="projects-grid">
+        {renderedProjects.map((project) => (
+          <ProjectCard
+            title={project.title}
+            featuredImage={project.featuredImage}
+            tech={project.tech}
+            link={project.link}
+            github={project.github}
+            Content={project.Content}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Blog Posts Preview -->
+  {recentPosts.length > 0 && (
+    <section class="section alt-bg">
+      <div class="container">
+        <div class="section-header-flex">
+          <div>
+            <h2 class="section-title">Latest Articles</h2>
+            <p class="section-subtitle">Thoughts on tech, growth hacking, and web engineering</p>
+          </div>
+          <a href="/blog" class="btn btn-secondary btn-sm">
+            Explore Blog &rarr;
+          </a>
+        </div>
+
+        <div class="posts-grid">
+          {recentPosts.map((post) => (
+            <a href={`/blog/${post.id}`} class="post-preview-card">
+              <div class="post-meta">
+                <span class="post-date">{post.formattedDate}</span>
+                {post.tag && <span class="badge">#{post.tag}</span>}
+              </div>
+              <h3 class="post-title">{post.title}</h3>
+              <span class="read-more">Read article &rarr;</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</Layout>
+
+<style>
+  .section {
+    padding: 4rem 0;
+  }
+
+  .alt-bg {
+    background-color: #0d131f;
+    border-top: 1px solid #1e293b;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  .section-header-flex {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .section-subtitle {
+    color: #94a3b8;
+    font-size: 1rem;
+    margin-top: 0.25rem;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  @media (max-width: 868px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 868px) {
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .post-preview-card {
+    background-color: #151d2a;
+    border: 1px solid #232d3f;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+
+  .post-preview-card:hover {
+    border-color: #38bdf8;
+    background-color: #1c2638;
+    transform: translateY(-2px);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-date {
+    font-size: 0.8125rem;
+    color: #64748b;
+  }
+
+  .post-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #f8fafc;
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+  }
+
+  .read-more {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #38bdf8;
+  }
+</style>

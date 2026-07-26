@@ -1,0 +1,171 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection, render } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const sortedProjects = allProjects.sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+
+const renderedProjects = await Promise.all(
+  sortedProjects.map(async (project) => {
+    const { Content } = await render(project);
+    return {
+      title: project.data.title,
+      featuredImage: project.data.featuredImage,
+      tech: project.data.tech,
+      link: project.data.link,
+      github: project.data.github,
+      techListJson: JSON.stringify(project.data.tech.map((t) => t.toLowerCase())),
+      Content,
+    };
+  })
+);
+
+const allTechs = Array.from(
+  new Set(sortedProjects.flatMap((p) => p.data.tech || []))
+).sort();
+---
+
+<Layout
+  title="Projects & Work | Mateus Tavares"
+  description="Explore full-stack apps, marketing site overhauls, and open source projects built by Mateus Tavares."
+>
+  <div class="projects-page">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="page-title">Jobs &amp; Projects</h1>
+        <p class="page-subtitle">
+          A showcase of platforms, marketing infrastructure, microservices, and apps I've engineered and maintained.
+        </p>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-container">
+        <span class="filter-label">Filter by Tech:</span>
+        <button class="filter-btn active" data-filter="all">All ({allProjects.length})</button>
+        {allTechs.map((tech) => (
+          <button class="filter-btn" data-filter={tech.toLowerCase()}>
+            {tech}
+          </button>
+        ))}
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="projects-grid" id="projects-grid">
+        {renderedProjects.map((project) => (
+          <div class="project-wrapper" data-tech={project.techListJson}>
+            <ProjectCard
+              title={project.title}
+              featuredImage={project.featuredImage}
+              tech={project.tech}
+              link={project.link}
+              github={project.github}
+              Content={project.Content}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectWrappers = document.querySelectorAll('.project-wrapper');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+
+      projectWrappers.forEach((wrapper) => {
+        const wrapperEl = wrapper as HTMLElement;
+        const techList = JSON.parse(wrapperEl.getAttribute('data-tech') || '[]');
+
+        if (filter === 'all' || techList.includes(filter)) {
+          wrapperEl.style.display = 'block';
+        } else {
+          wrapperEl.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .projects-page {
+    padding: 3.5rem 0 5rem 0;
+  }
+
+  .page-header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 3rem auto;
+  }
+
+  .page-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-subtitle {
+    color: #94a3b8;
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .filter-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    margin-bottom: 3rem;
+  }
+
+  .filter-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #64748b;
+    margin-right: 0.5rem;
+  }
+
+  .filter-btn {
+    background-color: #151d2a;
+    color: #94a3b8;
+    border: 1px solid #232d3f;
+    padding: 0.45rem 0.95rem;
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: capitalize;
+    transition: all 0.2s ease;
+  }
+
+  .filter-btn:hover {
+    color: #f8fafc;
+    border-color: #38bdf8;
+  }
+
+  .filter-btn.active {
+    background-color: #0284c7;
+    color: #ffffff;
+    border-color: #0369a1;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  @media (max-width: 868px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

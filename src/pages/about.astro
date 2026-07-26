@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import cashQuoteImg from '../assets/images/johnny-cash-too-long.jpg';
+---
+
+<Layout
+  title="About Me | Mateus Tavares"
+  description="Learn about Mateus Tavares — Full-Stack Developer, CRO Specialist, Father, Husband, and Johnny Cash enthusiast based in Vancouver."
+>
+  <div class="about-page">
+    <div class="container container-readable">
+      <div class="page-header">
+        <h1 class="page-title">About Me</h1>
+        <p class="page-subtitle">A quick snapshot and the story behind my work and passions.</p>
+      </div>
+
+      <!-- About in 30 Seconds -->
+      <section class="about-section">
+        <h2 class="section-title">About me in 30 seconds</h2>
+        <div class="cash-card">
+          <Image
+            src={cashQuoteImg}
+            alt="Johnny Cash Quote"
+            width={738}
+            height={300}
+            class="cash-image"
+          />
+        </div>
+
+        <ul class="quick-facts">
+          <li><strong>Marketing &amp; Growth Specialist</strong> with 8+ years of engineering &amp; conversion optimization experience</li>
+          <li><strong>Full-Stack Web Development</strong> enthusiast working with JavaScript, Node, React, and Astro</li>
+          <li><strong>Father &amp; Husband</strong> living in beautiful Vancouver, BC</li>
+          <li>A big <strong>Johnny Cash</strong> enthusiast</li>
+        </ul>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- About in Detail -->
+      <section class="about-section prose">
+        <h2 class="section-title">About me in detail</h2>
+
+        <p>
+          <strong>Hello, my name is Mateus</strong> &ndash; or Mat for short. I've heard so many variants of my name spoken in different languages that I find it easier to just introduce myself using the first three letters of my name.
+        </p>
+
+        <p>
+          I've been working as a CRO specialist and growth hacker at <a href="https://www.wishpond.com/" target="_blank" rel="noopener noreferrer">Wishpond</a>, where I became responsible for maintaining the company's blog and marketing website (powered by Ghost and WordPress). <strong>And that's where my passion for web development truly started.</strong>
+        </p>
+
+        <p>
+          Ever since, I haven't stopped programming in my spare time. I've built WordPress sites, micro-services, and custom web apps. I find myself using JavaScript and TypeScript most of the time, in both frontend and backend (much love Node! ✊).
+        </p>
+
+        <p>
+          This website itself is a project born out of that passion &ndash; built to share apps I'm working on, languages I'm exploring, and insights at the intersection of engineering and digital marketing.
+        </p>
+
+        <p>
+          I'm originally from a country region in the state of São Paulo, Brazil 🇧🇷. My academic and professional journey has been based in Vancouver, BC, where I currently reside with my wife and two boys.
+        </p>
+
+        <p>
+          In my free time, you'll often find me coaching my older son with his soccer skills, playing guitar, biking around the city with my family, or gaming.
+        </p>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .about-page {
+    padding: 3.5rem 0 5rem 0;
+  }
+
+  .container-readable {
+    max-width: 760px;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .page-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-subtitle {
+    color: #94a3b8;
+    font-size: 1.125rem;
+  }
+
+  .about-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-title {
+    font-size: 1.65rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    color: #f8fafc;
+  }
+
+  .cash-card {
+    background-color: #151d2a;
+    border: 1px solid #232d3f;
+    border-radius: 0.85rem;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .cash-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .quick-facts {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .quick-facts li {
+    background-color: #151d2a;
+    border: 1px solid #232d3f;
+    padding: 0.85rem 1.25rem;
+    border-radius: 0.5rem;
+    color: #cbd5e1;
+    font-size: 0.95rem;
+  }
+
+  .quick-facts strong {
+    color: #38bdf8;
+  }
+
+  .divider {
+    border: 0;
+    height: 1px;
+    background-color: #232d3f;
+    margin: 3rem 0;
+  }
+</style>
