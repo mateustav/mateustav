@@ -132,22 +132,28 @@ import profilePic from '../assets/images/icon.png';
   .hero-avatar-wrapper {
     display: flex;
     justify-content: center;
+    align-items: flex-end;
   }
 
   .avatar-card {
     position: relative;
     background-color: #151d2a;
     border: 1px solid #232d3f;
-    padding: 0.75rem;
+    padding: 0;
     border-radius: 1.25rem;
+    overflow: hidden;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
   }
 
   .hero-avatar {
     width: 100%;
-    max-width: 260px;
+    max-width: 280px;
     height: auto;
-    border-radius: 0.85rem;
     display: block;
+    border-radius: 1.25rem;
+    margin: 0;
   }
 </style>
