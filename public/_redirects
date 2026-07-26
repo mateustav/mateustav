@@ -1,0 +1,6 @@
+# Cloudflare Pages Edge Redirects
+# Enforce 301 Permanent Redirect to trailing slashes
+/about /about/ 301
+/projects /projects/ 301
+/blog /blog/ 301
+/contact /contact/ 301

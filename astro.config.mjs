@@ -5,6 +5,7 @@ import mdx from '@astrojs/mdx';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://mattavares.com',
+  trailingSlash: 'always',
   output: 'static',
   integrations: [sitemap(), mdx()],
   image: {
