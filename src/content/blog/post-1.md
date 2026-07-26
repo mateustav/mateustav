@@ -1,4 +1,5 @@
 ---
+draft: true
 path: "/post/my-first-post/"
 date: "2020-05-11 12:30:00"
 updated_at: "2020-05-11 12:30:00"

@@ -1,4 +1,5 @@
 ---
+draft: true
 path: "/post/my-tenth-post/"
 date: "2020-05-19 12:55:00"
 tag: "Test"

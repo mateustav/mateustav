@@ -1,4 +1,5 @@
 ---
+draft: true
 path: "/post/my-second-post/"
 date: "2020-05-18 12:30:00"
 title: "My second blog post"

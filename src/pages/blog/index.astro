@@ -50,26 +50,33 @@ const allTags = Array.from(
         </div>
       )}
 
-      <div class="posts-list">
-        {formattedPosts.map((post) => (
-          <article class="post-item" data-tag={post.rawTag}>
-            <div class="post-header-line">
-              <time class="post-date">{post.formattedDate}</time>
-              {post.tag && <span class="badge">{post.tag}</span>}
-            </div>
+      {formattedPosts.length > 0 ? (
+        <div class="posts-list">
+          {formattedPosts.map((post) => (
+            <article class="post-item" data-tag={post.rawTag}>
+              <div class="post-header-line">
+                <time class="post-date">{post.formattedDate}</time>
+                {post.tag && <span class="badge">{post.tag}</span>}
+              </div>
 
-            <h2 class="post-title">
-              <a href={`/blog/${post.id}`}>{post.title}</a>
-            </h2>
+              <h2 class="post-title">
+                <a href={`/blog/${post.id}`}>{post.title}</a>
+              </h2>
 
-            <p class="post-excerpt">{post.excerpt}</p>
+              <p class="post-excerpt">{post.excerpt}</p>
 
-            <a href={`/blog/${post.id}`} class="read-link">
-              Read Article &rarr;
-            </a>
-          </article>
-        ))}
-      </div>
+              <a href={`/blog/${post.id}`} class="read-link">
+                Read Article &rarr;
+              </a>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="empty-blog-box">
+          <h3>Articles coming soon!</h3>
+          <p>I'm currently working on new write-ups about full-stack engineering, web performance, and growth. Check back soon!</p>
+        </div>
+      )}
     </div>
   </div>
 </Layout>
@@ -223,5 +230,27 @@ const allTags = Array.from(
     color: #38bdf8;
     display: inline-flex;
     align-items: center;
+  }
+
+  .empty-blog-box {
+    text-align: center;
+    background-color: #151d2a;
+    border: 1px solid #232d3f;
+    border-radius: 0.85rem;
+    padding: 3rem 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .empty-blog-box h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #f8fafc;
+  }
+
+  .empty-blog-box p {
+    color: #94a3b8;
+    font-size: 0.95rem;
   }
 </style>

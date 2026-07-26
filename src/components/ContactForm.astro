@@ -9,8 +9,8 @@
 >
   <!-- Web3Forms Access Key or standard Netlify form fallback -->
   <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
-  <input type="hidden" name="subject" value="New message from matttt.ca contact form" />
-  <input type="hidden" name="from_name" value="matttt.ca Contact Form" />
+  <input type="hidden" name="subject" value="New message from mattavares.com contact form" />
+  <input type="hidden" name="from_name" value="mattavares.com Contact Form" />
 
   <div class="form-group">
     <label for="name">Name</label>
@@ -76,7 +76,6 @@
       const formData = new FormData(form);
 
       try {
-        // Attempt AJAX submission
         const response = await fetch(form.action, {
           method: 'POST',
           body: formData,
@@ -92,10 +91,9 @@
           }
           form.reset();
         } else {
-          // Fallback message
           if (statusDiv) {
             statusDiv.className = 'form-status status-success';
-            statusDiv.textContent = 'Message captured! (If you have web3forms key configured, it will deliver directly).';
+            statusDiv.textContent = 'Message captured!';
           }
         }
       } catch (err) {

@@ -4,10 +4,10 @@ import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://matttt.ca',
+  site: 'https://mattavares.com',
   output: 'static',
   integrations: [sitemap(), mdx()],
   image: {
-    domains: ['matttt.ca'],
+    domains: ['mattavares.com'],
   },
 });
