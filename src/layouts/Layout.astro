@@ -10,8 +10,8 @@ interface Props {
 }
 
 const {
-  title = "Mateus Tavares | Full-Stack Developer & Growth Enthusiast",
-  description = "Personal website, projects, and blog of Mateus Tavares. Full-Stack Developer based in Vancouver, BC.",
+  title = "Mateus Tavares | Full-Stack Software Engineer",
+  description = "Personal website, projects, and blog of Mateus Tavares. Full-Stack Software Engineer based in Calgary, AB specializing in Ruby on Rails, React, and TypeScript.",
   image = "/icon.png",
 } = Astro.props;
 
@@ -45,7 +45,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-    <!-- Google Tag Manager / Analytics if present -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1XE9R363F9"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
