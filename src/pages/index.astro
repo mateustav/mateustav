@@ -39,7 +39,7 @@ const recentPosts = allPosts
   }));
 ---
 
-<Layout title="Mateus Tavares | Full-Stack Developer & Growth Specialist">
+<Layout title="Mateus Tavares | Full-Stack Software Engineer">
   <Hero />
   <TechStack />
 
@@ -51,7 +51,7 @@ const recentPosts = allPosts
           <h2 class="section-title">Featured Projects</h2>
           <p class="section-subtitle">A selection of recent applications, platforms, and overhauls</p>
         </div>
-        <a href="/projects" class="btn btn-secondary btn-sm">
+        <a href="/projects/" class="btn btn-secondary btn-sm">
           View All Projects ({allProjects.length}) &rarr;
         </a>
       </div>
@@ -78,16 +78,16 @@ const recentPosts = allPosts
         <div class="section-header-flex">
           <div>
             <h2 class="section-title">Latest Articles</h2>
-            <p class="section-subtitle">Thoughts on tech, growth hacking, and web engineering</p>
+            <p class="section-subtitle">Thoughts on tech, web engineering, and software craft</p>
           </div>
-          <a href="/blog" class="btn btn-secondary btn-sm">
+          <a href="/blog/" class="btn btn-secondary btn-sm">
             Explore Blog &rarr;
           </a>
         </div>
 
         <div class="posts-grid">
           {recentPosts.map((post) => (
-            <a href={`/blog/${post.id}`} class="post-preview-card">
+            <a href={`/blog/${post.id}/`} class="post-preview-card">
               <div class="post-meta">
                 <span class="post-date">{post.formattedDate}</span>
                 {post.tag && <span class="badge">#{post.tag}</span>}

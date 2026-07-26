@@ -27,14 +27,14 @@ const allTags = Array.from(
 
 <Layout
   title="Blog & Articles | Mateus Tavares"
-  description="Articles and tutorials on full-stack web engineering, marketing technology, CRO, and digital tools."
+  description="Articles and tutorials on full-stack web engineering, Ruby on Rails, React, and digital tools."
 >
   <div class="blog-page">
     <div class="container">
       <div class="page-header">
         <h1 class="page-title">Blog &amp; Articles</h1>
         <p class="page-subtitle">
-          Insights on web development, digital marketing engineering, and software experiments.
+          Insights on full-stack web engineering, Ruby on Rails, frontend craft, and software experiments.
         </p>
       </div>
 
@@ -60,12 +60,12 @@ const allTags = Array.from(
               </div>
 
               <h2 class="post-title">
-                <a href={`/blog/${post.id}`}>{post.title}</a>
+                <a href={`/blog/${post.id}/`}>{post.title}</a>
               </h2>
 
               <p class="post-excerpt">{post.excerpt}</p>
 
-              <a href={`/blog/${post.id}`} class="read-link">
+              <a href={`/blog/${post.id}/`} class="read-link">
                 Read Article &rarr;
               </a>
             </article>
@@ -74,7 +74,7 @@ const allTags = Array.from(
       ) : (
         <div class="empty-blog-box">
           <h3>Articles coming soon!</h3>
-          <p>I'm currently working on new write-ups about full-stack engineering, web performance, and growth. Check back soon!</p>
+          <p>I'm currently working on new write-ups about full-stack engineering, web performance, and software craft. Check back soon!</p>
         </div>
       )}
     </div>
