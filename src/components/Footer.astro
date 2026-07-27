@@ -27,8 +27,8 @@ const linkedinSvg = icon(faLinkedin)?.html[0] || '';
 
 <style>
   .site-footer {
-    background-color: #080c14;
-    border-top: 1px solid #1e293b;
+    background-color: var(--bg-app);
+    border-top: 1px solid var(--border-color);
     padding: 2.5rem 0;
     margin-top: 5rem;
   }
@@ -42,13 +42,14 @@ const linkedinSvg = icon(faLinkedin)?.html[0] || '';
   }
 
   .copyright {
-    color: #cbd5e1;
+    color: var(--text-primary);
     font-size: 0.9375rem;
     font-weight: 500;
   }
 
   .tagline {
-    color: #64748b;
+    color: var(--text-primary);
+    opacity: 0.6;
     font-size: 0.8125rem;
     margin-top: 0.25rem;
   }
@@ -60,13 +61,14 @@ const linkedinSvg = icon(faLinkedin)?.html[0] || '';
   }
 
   .social-link {
-    color: #94a3b8;
+    color: var(--text-primary);
+    opacity: 0.8;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 24px;
     height: 24px;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
   }
 
   .social-link :global(svg) {
@@ -76,6 +78,7 @@ const linkedinSvg = icon(faLinkedin)?.html[0] || '';
   }
 
   .social-link:hover {
-    color: #38bdf8;
+    color: var(--brand-gold);
+    opacity: 1;
   }
 </style>

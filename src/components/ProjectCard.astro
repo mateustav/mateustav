@@ -60,8 +60,8 @@ const { title, featuredImage, tech = [], link, github, Content } = Astro.props;
 
 <style>
   .project-card {
-    background-color: #151d2a;
-    border: 1px solid #232d3f;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 0.85rem;
     overflow: hidden;
     display: flex;
@@ -71,17 +71,17 @@ const { title, featuredImage, tech = [], link, github, Content } = Astro.props;
   }
 
   .project-card:hover {
-    border-color: #38bdf8;
-    background-color: #1c2638;
+    border-color: var(--brand-gold);
+    background-color: var(--bg-subtle);
   }
 
   .card-image-wrapper {
     position: relative;
     width: 100%;
     height: 200px;
-    background-color: #0b0f19;
+    background-color: var(--bg-app);
     overflow: hidden;
-    border-bottom: 1px solid #232d3f;
+    border-bottom: 1px solid var(--border-color);
   }
 
   .project-image {
@@ -110,7 +110,7 @@ const { title, featuredImage, tech = [], link, github, Content } = Astro.props;
     font-size: 1.35rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    color: #f8fafc;
+    color: var(--text-primary);
   }
 
   .tech-tags {
@@ -120,7 +120,8 @@ const { title, featuredImage, tech = [], link, github, Content } = Astro.props;
   }
 
   .project-description {
-    color: #94a3b8;
+    color: var(--text-primary);
+    opacity: 0.8;
     font-size: 0.9375rem;
     line-height: 1.6;
     margin-bottom: 1.5rem;
@@ -138,7 +139,7 @@ const { title, featuredImage, tech = [], link, github, Content } = Astro.props;
     gap: 0.75rem;
     margin-top: auto;
     padding-top: 1rem;
-    border-top: 1px solid #232d3f;
+    border-top: 1px solid var(--border-color);
   }
 
   .btn-sm {

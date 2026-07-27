@@ -69,12 +69,12 @@ import profilePic from '../assets/images/icon.png';
     align-items: center;
     gap: 0.5rem;
     padding: 0.35rem 0.85rem;
-    background-color: #1e293b;
-    border: 1px solid #334155;
+    background-color: var(--bg-subtle);
+    border: 1px solid var(--border-color);
     border-radius: 9999px;
     font-size: 0.875rem;
     font-weight: 500;
-    color: #93c5fd;
+    color: var(--brand-sage);
     margin-bottom: 1.25rem;
   }
 
@@ -82,7 +82,7 @@ import profilePic from '../assets/images/icon.png';
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: #10b981;
+    background-color: var(--brand-sage);
     display: inline-block;
   }
 
@@ -101,19 +101,21 @@ import profilePic from '../assets/images/icon.png';
   }
 
   .highlight {
-    color: #38bdf8;
+    color: var(--brand-gold);
   }
 
   .hero-subtitle {
     font-size: 1.15rem;
-    color: #94a3b8;
+    color: var(--text-primary);
+    opacity: 0.8;
     line-height: 1.65;
     margin-bottom: 2rem;
     max-width: 620px;
   }
 
   .hero-subtitle strong {
-    color: #f8fafc;
+    color: var(--text-primary);
+    opacity: 1;
   }
 
   .hero-actions {
@@ -137,12 +139,12 @@ import profilePic from '../assets/images/icon.png';
 
   .avatar-card {
     position: relative;
-    background-color: #151d2a;
-    border: 1px solid #232d3f;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
     padding: 0;
     border-radius: 1.25rem;
     overflow: hidden;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: center;
     align-items: flex-end;

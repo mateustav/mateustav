@@ -109,8 +109,8 @@ const recentPosts = allPosts
 
   .alt-bg {
     background-color: #0d131f;
-    border-top: 1px solid #1e293b;
-    border-bottom: 1px solid #1e293b;
+    border-top: 1px solid var(--bg-subtle);
+    border-bottom: 1px solid var(--bg-subtle);
   }
 
   .section-header-flex {
@@ -128,7 +128,7 @@ const recentPosts = allPosts
   }
 
   .section-subtitle {
-    color: #94a3b8;
+    color: var(--text-primary);
     font-size: 1rem;
     margin-top: 0.25rem;
   }
@@ -158,8 +158,8 @@ const recentPosts = allPosts
   }
 
   .post-preview-card {
-    background-color: #151d2a;
-    border: 1px solid #232d3f;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 0.75rem;
     padding: 1.5rem;
     display: flex;
@@ -170,8 +170,8 @@ const recentPosts = allPosts
   }
 
   .post-preview-card:hover {
-    border-color: #38bdf8;
-    background-color: #1c2638;
+    border-color: var(--brand-gold);
+    background-color: var(--bg-subtle);
     transform: translateY(-2px);
   }
 
@@ -184,13 +184,13 @@ const recentPosts = allPosts
 
   .post-date {
     font-size: 0.8125rem;
-    color: #64748b;
+    color: var(--text-primary);
   }
 
   .post-title {
     font-size: 1.15rem;
     font-weight: 600;
-    color: #f8fafc;
+    color: var(--text-primary);
     line-height: 1.4;
     margin-bottom: 1.5rem;
   }
@@ -198,6 +198,6 @@ const recentPosts = allPosts
   .read-more {
     font-size: 0.875rem;
     font-weight: 600;
-    color: #38bdf8;
+    color: var(--brand-gold);
   }
 </style>
