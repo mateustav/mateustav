@@ -57,7 +57,7 @@ export async function onRequestPost({ request, env }) {
       headers: { 'Content-Type': 'application/json' }
     });
   } catch (err) {
-    return new Response(JSON.stringify({ success: false, message: 'Server error' }), {
+    return new Response(JSON.stringify({ success: false, message: err.message || 'Server error' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });

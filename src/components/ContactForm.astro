@@ -85,6 +85,8 @@
           }
         });
 
+        const result = await response.json().catch(() => ({}));
+
         if (response.ok) {
           if (statusDiv) {
             statusDiv.className = 'form-status status-success';
@@ -93,8 +95,8 @@
           form.reset();
         } else {
           if (statusDiv) {
-            statusDiv.className = 'form-status status-success';
-            statusDiv.textContent = 'Message captured!';
+            statusDiv.className = 'form-status status-error';
+            statusDiv.textContent = result.message || 'Something went wrong. Please try again.';
           }
         }
       } catch (err) {
