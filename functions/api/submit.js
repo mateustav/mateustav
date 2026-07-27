@@ -33,10 +33,9 @@ export async function onRequestPost({ request, env }) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        // Resend allows sending from 'onboarding@resend.dev' for free testing, 
-        // or you can verify your domain to send from 'contact@mattavares.com'
-        from: 'mattavares.com Form <onboarding@resend.dev>',
+        from: 'mattavares.com Form <contact@mattavares.com>',
         to: env.CONTACT_EMAIL_ADDRESS, // The email address you want to receive messages at
+        reply_to: email, // Allows you to hit "Reply" in your email client and reply directly to the sender!
         subject: `New message from ${name} via mattavares.com`,
         html: `
           <h3>New Contact Form Submission</h3>
