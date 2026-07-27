@@ -56,7 +56,8 @@ export async function onRequestPost({ request, env }) {
       headers: { 'Content-Type': 'application/json' }
     });
   } catch (err) {
-    return new Response(JSON.stringify({ success: false, message: err.message || 'Server error' }), {
+    console.error('Form submission error:', err); // Log the actual error to Cloudflare console for debugging
+    return new Response(JSON.stringify({ success: false, message: 'Server error. Please try again later.' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });
