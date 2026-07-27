@@ -85,7 +85,7 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
   }
 
   .back-link:hover {
-    color: var(--brand-gold);
+    color: var(--brand-sage);
   }
 
   .post-header {
@@ -105,15 +105,15 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
   }
 
   .post-title {
-    font-size: 2.5rem;
+    font-size: 1.85rem;
     font-weight: 800;
     line-height: 1.25;
     color: var(--text-primary);
   }
 
-  @media (max-width: 640px) {
+  @media (min-width: 640px) {
     .post-title {
-      font-size: 1.85rem;
+      font-size: 2.5rem;
     }
   }
 

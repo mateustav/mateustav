@@ -52,15 +52,16 @@ import profilePic from '../assets/images/icon.png';
 
   .hero-container {
     display: grid;
-    grid-template-columns: 1.3fr 0.7fr;
+    grid-template-columns: 1fr;
+    text-align: center;
     align-items: center;
     gap: 3rem;
   }
 
-  @media (max-width: 768px) {
+  @media (min-width: 768px) {
     .hero-container {
-      grid-template-columns: 1fr;
-      text-align: center;
+      grid-template-columns: 1.3fr 0.7fr;
+      text-align: left;
     }
   }
 
@@ -74,7 +75,7 @@ import profilePic from '../assets/images/icon.png';
     border-radius: 9999px;
     font-size: 0.875rem;
     font-weight: 500;
-    color: var(--brand-sage);
+    color: var(--text-primary);
     margin-bottom: 1.25rem;
   }
 
@@ -87,21 +88,21 @@ import profilePic from '../assets/images/icon.png';
   }
 
   .hero-headline {
-    font-size: 3.25rem;
+    font-size: 2.35rem;
     font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1.15;
     margin-bottom: 1.25rem;
   }
 
-  @media (max-width: 640px) {
+  @media (min-width: 640px) {
     .hero-headline {
-      font-size: 2.35rem;
+      font-size: 3.25rem;
     }
   }
 
   .highlight {
-    color: var(--brand-gold);
+    color: var(--brand-sage);
   }
 
   .hero-subtitle {
@@ -123,11 +124,12 @@ import profilePic from '../assets/images/icon.png';
     align-items: center;
     gap: 1rem;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
-  @media (max-width: 768px) {
+  @media (min-width: 768px) {
     .hero-actions {
-      justify-content: center;
+      justify-content: flex-start;
     }
   }
 

@@ -135,25 +135,23 @@ const recentPosts = allPosts
 
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 2rem;
-  }
-
-  @media (max-width: 868px) {
-    .projects-grid {
-      grid-template-columns: 1fr;
-    }
   }
 
   .posts-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
-  @media (max-width: 868px) {
+  @media (min-width: 868px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
     .posts-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
@@ -170,7 +168,7 @@ const recentPosts = allPosts
   }
 
   .post-preview-card:hover {
-    border-color: var(--brand-gold);
+    border-color: var(--brand-sage);
     background-color: var(--bg-subtle);
     transform: translateY(-2px);
   }
@@ -198,6 +196,6 @@ const recentPosts = allPosts
   .read-more {
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--brand-gold);
+    color: var(--brand-sage);
   }
 </style>

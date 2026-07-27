@@ -148,24 +148,24 @@ const allTechs = Array.from(
 
   .filter-btn:hover {
     color: var(--text-primary);
-    border-color: var(--brand-gold);
+    border-color: var(--brand-sage);
   }
 
   .filter-btn.active {
-    background-color: var(--brand-gold);
+    background-color: var(--brand-sage);
     color: var(--text-primary);
-    border-color: var(--brand-gold);
+    border-color: var(--brand-sage);
   }
 
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 2rem;
   }
 
-  @media (max-width: 868px) {
+  @media (min-width: 868px) {
     .projects-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 </style>
