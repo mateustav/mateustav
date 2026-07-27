@@ -15,7 +15,14 @@ const navItems = [
       <span class="brand-text">mattavares<span class="brand-accent">.com</span></span>
     </a>
 
-    <nav class="nav-links">
+    <button class="mobile-toggle" aria-label="Toggle Navigation" aria-expanded="false" id="mobile-toggle">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path class="menu-icon" d="M4 6h16M4 12h16M4 18h16" />
+        <path class="close-icon" d="M6 18L18 6M6 6l12 12" style="display: none;" />
+      </svg>
+    </button>
+
+    <nav class="nav-links" id="nav-links">
       {navItems.map((item) => {
         const itemClean = item.href === '/' ? '/' : item.href.replace(/\/$/, '');
         const pathClean = pathname === '/' ? '/' : pathname.replace(/\/$/, '');
@@ -30,10 +37,57 @@ const navItems = [
           </a>
         );
       })}
-      <a href="/contact/" class="btn btn-primary btn-sm">Contact</a>
+      <a href="/contact/" class="btn btn-primary btn-sm mobile-cta">Contact</a>
     </nav>
   </div>
 </header>
+
+<script>
+  // Runs on initial load and after every View Transition navigation
+  document.addEventListener('astro:page-load', () => {
+    const toggleBtn = document.getElementById('mobile-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const menuIcon = document.querySelector('.menu-icon') as SVGPathElement;
+    const closeIcon = document.querySelector('.close-icon') as SVGPathElement;
+
+    if (toggleBtn && navLinks && menuIcon && closeIcon) {
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent the document click listener from immediately firing
+        const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+        toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
+        navLinks.classList.toggle('is-open');
+
+        if (!isExpanded) {
+          menuIcon.style.display = 'none';
+          closeIcon.style.display = 'block';
+        } else {
+          menuIcon.style.display = 'block';
+          closeIcon.style.display = 'none';
+        }
+      });
+    }
+  });
+
+  // A single global click listener to handle clicking outside.
+  // By querying the DOM inside the event, we avoid adding duplicate listeners on route changes.
+  document.addEventListener('click', (event) => {
+    const toggleBtn = document.getElementById('mobile-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const menuIcon = document.querySelector('.menu-icon') as SVGPathElement;
+    const closeIcon = document.querySelector('.close-icon') as SVGPathElement;
+
+    if (toggleBtn && navLinks && menuIcon && closeIcon) {
+      if (!toggleBtn.contains(event.target as Node) && !navLinks.contains(event.target as Node)) {
+        if (navLinks.classList.contains('is-open')) {
+          toggleBtn.setAttribute('aria-expanded', 'false');
+          navLinks.classList.remove('is-open');
+          menuIcon.style.display = 'block';
+          closeIcon.style.display = 'none';
+        }
+      }
+    }
+  });
+</script>
 
 <style>
   .navbar-header {
@@ -50,6 +104,7 @@ const navItems = [
     align-items: center;
     justify-content: space-between;
     height: 4.5rem;
+    position: relative;
   }
 
   .brand {
@@ -58,10 +113,21 @@ const navItems = [
     color: var(--text-primary);
     text-decoration: none;
     letter-spacing: -0.025em;
+    z-index: 101;
   }
 
   .brand-accent {
     color: var(--brand-gold);
+  }
+
+  .mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 101;
   }
 
   .nav-links {
@@ -105,5 +171,60 @@ const navItems = [
   .btn-sm {
     padding: 0.4rem 0.875rem;
     font-size: 0.875rem;
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 768px) {
+    .mobile-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-links {
+      position: absolute;
+      top: 4.5rem;
+      left: 0;
+      right: 0;
+      background-color: var(--bg-app);
+      border-bottom: 1px solid var(--border-color);
+      flex-direction: column;
+      align-items: stretch;
+      padding: 1rem 1.5rem 1.5rem 1.5rem;
+      gap: 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      
+      /* Hidden by default */
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease-in-out;
+      z-index: 99;
+    }
+
+    .nav-links.is-open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .nav-link {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border-color);
+      width: 100%;
+    }
+
+    .nav-link.active::after {
+      display: none;
+    }
+    
+    .nav-link.active {
+      border-bottom-color: var(--brand-sage);
+    }
+
+    .mobile-cta {
+      margin-top: 0.5rem;
+      text-align: center;
+    }
   }
 </style>
