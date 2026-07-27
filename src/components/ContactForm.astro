@@ -3,14 +3,15 @@
 
 <form
   id="contact-form"
-  action="https://api.web3forms.com/submit"
+  action="/api/submit"
   method="POST"
   class="contact-form"
 >
-  <!-- Web3Forms Access Key or standard Netlify form fallback -->
-  <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
-  <input type="hidden" name="subject" value="New message from mattavares.com contact form" />
-  <input type="hidden" name="from_name" value="mattavares.com Contact Form" />
+  <!-- Honeypot field to prevent spam bots -->
+  <div class="form-group honeypot" style="display: none;">
+    <label for="bot_field">Leave this field blank</label>
+    <input type="text" id="bot_field" name="bot_field" tabindex="-1" autocomplete="off" />
+  </div>
 
   <div class="form-group">
     <label for="name">Name</label>
