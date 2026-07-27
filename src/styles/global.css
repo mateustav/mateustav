@@ -2,13 +2,14 @@
 
 :root {
   /* Light Mode (Default) */
-  --bg-app: var(--text-primary);
+  --bg-app: #FFFFFF;
   --bg-card: #F6EAB6;
   --bg-subtle: #FDFBF7;
   --text-primary: #4A4A4A;
-  --text-on-accent: #4A4A4A;
+  --text-on-accent: #141715;
   --brand-gold: #F1C84B;
   --brand-sage: #A9D6BB;
+  --brand-sage-hover: #8FBF9F;
   --border-color: #E2DED4;
   
   --radius-sm: 6px;
@@ -31,6 +32,7 @@
     --text-on-accent: #141715;
     --brand-gold: #F1C84B;
     --brand-sage: #7DA88D;
+    --brand-sage-hover: #658D74;
     --border-color: #2C352F;
   }
 }
@@ -61,13 +63,13 @@ main {
 }
 
 a {
-  color: var(--brand-gold);
+  color: var(--brand-sage);
   text-decoration: none;
   transition: var(--transition);
 }
 
 a:hover {
-  color: var(--brand-sage);
+  color: var(--brand-sage-hover);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -101,8 +103,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .badge-primary {
   background-color: var(--bg-card);
-  color: var(--brand-gold);
-  border-color: var(--brand-gold);
+  color: var(--brand-sage);
+  border-color: var(--brand-sage);
 }
 
 /* Button Component - Pure Solid Styling, No Gradients */
@@ -122,13 +124,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary {
-  background-color: var(--brand-gold);
+  background-color: var(--brand-sage);
   color: var(--text-on-accent);
-  border-color: var(--brand-gold);
+  border-color: var(--brand-sage);
 }
 
 .btn-primary:hover {
-  background-color: var(--brand-sage);
+  background-color: var(--brand-sage-hover);
+  border-color: var(--brand-sage-hover);
   color: var(--text-on-accent);
 }
 
@@ -154,7 +157,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card:hover {
-  border-color: var(--brand-gold);
+  border-color: var(--brand-sage);
   background-color: var(--bg-subtle);
 }
 
