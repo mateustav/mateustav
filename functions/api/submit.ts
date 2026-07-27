@@ -1,4 +1,9 @@
-export async function onRequestPost({ request, env }) {
+interface Env {
+  RESEND_API_KEY: string;
+  CONTACT_EMAIL_ADDRESS: string;
+}
+
+export async function onRequestPost({ request, env }: { request: Request, env: Env }) {
   try {
     const formData = await request.formData();
     
@@ -13,9 +18,9 @@ export async function onRequestPost({ request, env }) {
       });
     }
 
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const message = formData.get('message');
+    const name = formData.get('name')?.toString();
+    const email = formData.get('email')?.toString();
+    const message = formData.get('message')?.toString();
 
     // Basic validation
     if (!name || !email || !message) {
@@ -47,7 +52,7 @@ export async function onRequestPost({ request, env }) {
     });
 
     if (!resendResponse.ok) {
-      const errorData = await resendResponse.json();
+      const errorData = await resendResponse.json() as any;
       throw new Error(errorData.message || 'Resend API failed');
     }
 

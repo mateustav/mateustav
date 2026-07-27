@@ -25,7 +25,7 @@ const Stack = () => {
         </Col>
         <Col lg={true} xs={6} md={true} className="my-3 mb-md-5">
           <div className="d-flex h-100 w-100" data-target="#javascript" data-tooltip="Javascript">
-              <FontAwesomeIcon style="max-width: 112px" icon={faJs} id="javascript" className="fa-5x fa-fw m-auto w-100" style={{zIndex: 2}} />
+              <FontAwesomeIcon style={{maxWidth: '112px', zIndex: 2}} icon={faJs} id="javascript" className="fa-5x fa-fw m-auto w-100" />
               <FontAwesomeIcon style="max-width: 112px" icon={faSquareFull} className=" fa-2x fa-stack-2x fa-fw m-auto" />
           </div>
         </Col>
