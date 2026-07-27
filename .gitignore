@@ -24,3 +24,11 @@ yarn-error.log*
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
