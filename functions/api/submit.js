@@ -33,7 +33,7 @@ export async function onRequestPost({ request, env }) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: 'mattavares.com Form <contact@mattavares.com>',
+        from: 'mattavares.com Form <me@mattavares.com>',
         to: env.CONTACT_EMAIL_ADDRESS, // The email address you want to receive messages at
         reply_to: email, // Allows you to hit "Reply" in your email client and reply directly to the sender!
         subject: `New message from ${name} via mattavares.com`,
