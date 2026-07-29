@@ -1,29 +1,33 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import { getCollection, render } from 'astro:content';
+import Layout from "../layouts/Layout.astro"
+import ProjectCard from "../components/ProjectCard.astro"
+import { getCollection, render } from "astro:content"
 
-const allProjects = await getCollection('projects');
-const sortedProjects = allProjects.sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+const allProjects = await getCollection("projects")
+const sortedProjects = allProjects.sort(
+  (a, b) => (a.data.order || 99) - (b.data.order || 99)
+)
 
 const renderedProjects = await Promise.all(
   sortedProjects.map(async (project) => {
-    const { Content } = await render(project);
+    const { Content } = await render(project)
     return {
       title: project.data.title,
       featuredImage: project.data.featuredImage,
       tech: project.data.tech,
       link: project.data.link,
       github: project.data.github,
-      techListJson: JSON.stringify(project.data.tech.map((t) => t.toLowerCase())),
+      techListJson: JSON.stringify(
+        project.data.tech.map((t) => t.toLowerCase())
+      ),
       Content,
-    };
+    }
   })
-);
+)
 
 const allTechs = Array.from(
   new Set(sortedProjects.flatMap((p) => p.data.tech || []))
-).sort();
+).sort()
 ---
 
 <Layout
@@ -35,63 +39,70 @@ const allTechs = Array.from(
       <div class="page-header">
         <h1 class="page-title">Jobs &amp; Projects</h1>
         <p class="page-subtitle">
-          A showcase of platforms, marketing infrastructure, microservices, and apps I've engineered and maintained.
+          A showcase of platforms, marketing infrastructure, microservices, and
+          apps I've engineered and maintained.
         </p>
       </div>
 
       <!-- Filter Bar -->
       <div class="filter-container">
         <span class="filter-label">Filter by Tech:</span>
-        <button class="filter-btn active" data-filter="all">All ({allProjects.length})</button>
-        {allTechs.map((tech) => (
-          <button class="filter-btn" data-filter={tech.toLowerCase()}>
-            {tech}
-          </button>
-        ))}
+        <button class="filter-btn active" data-filter="all"
+          >All ({allProjects.length})</button
+        >
+        {
+          allTechs.map((tech) => (
+            <button class="filter-btn" data-filter={tech.toLowerCase()}>
+              {tech}
+            </button>
+          ))
+        }
       </div>
 
       <!-- Projects Grid -->
       <div class="projects-grid" id="projects-grid">
-        {renderedProjects.map((project) => (
-          <div class="project-wrapper" data-tech={project.techListJson}>
-            <ProjectCard
-              title={project.title}
-              featuredImage={project.featuredImage}
-              tech={project.tech}
-              link={project.link}
-              github={project.github}
-              Content={project.Content}
-            />
-          </div>
-        ))}
+        {
+          renderedProjects.map((project) => (
+            <div class="project-wrapper" data-tech={project.techListJson}>
+              <ProjectCard
+                title={project.title}
+                featuredImage={project.featuredImage}
+                tech={project.tech}
+                link={project.link}
+                github={project.github}
+                Content={project.Content}
+              />
+            </div>
+          ))
+        }
       </div>
     </div>
   </div>
 </Layout>
 
 <script>
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const projectWrappers = document.querySelectorAll('.project-wrapper');
+  const filterBtns = document.querySelectorAll(".filter-btn")
+  const projectWrappers = document.querySelectorAll(".project-wrapper")
 
   filterBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
+    btn.addEventListener("click", () => {
+      filterBtns.forEach((b) => b.classList.remove("active"))
+      btn.classList.add("active")
 
-      const filter = btn.getAttribute('data-filter');
+      const filter = btn.getAttribute("data-filter")
 
       projectWrappers.forEach((wrapper) => {
-        const wrapperEl = wrapper as HTMLElement;
-        const techList = JSON.parse(wrapperEl.getAttribute('data-tech') || '[]');
+        const wrapperEl = wrapper as HTMLElement
+        const techList = JSON.parse(wrapperEl.getAttribute("data-tech") || "[]")
 
-        if (filter === 'all' || techList.includes(filter)) {
-          wrapperEl.style.display = 'block';
+        if (filter === "all" || techList.includes(filter)) {
+          wrapperEl.style.display = "block"
         } else {
-          wrapperEl.style.display = 'none';
+          wrapperEl.style.display = "none"
         }
-      });
-    });
-  });
+      })
+    })
+  })
 </script>
 
 <style>
@@ -138,7 +149,6 @@ const allTechs = Array.from(
     color: var(--text-primary);
     border: 1px solid var(--border-color);
     padding: 0.45rem 0.95rem;
-    border-radius: 9999px;
     font-size: 0.8125rem;
     font-weight: 500;
     cursor: pointer;

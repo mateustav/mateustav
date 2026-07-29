@@ -10,15 +10,15 @@
   --brand-sage: #a9d6bb;
   --brand-sage-hover: #8fbf9f;
   --border-color: #e2ded4;
-  
+
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 16px;
   --radius-full: 9999px;
-  
+
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  
+
   --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -35,7 +35,9 @@
   }
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -70,7 +72,12 @@ a:hover {
   color: var(--brand-sage-hover);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--text-primary);
   font-weight: 700;
   line-height: 1.25;
@@ -91,7 +98,6 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0.25rem 0.625rem;
   font-size: 0.75rem;
   font-weight: 500;
-  border-radius: var(--radius-sm);
   background-color: var(--bg-subtle);
   color: var(--brand-sage);
   border: 1px solid var(--border-color);
@@ -114,7 +120,6 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0.625rem 1.25rem;
   font-size: 0.9375rem;
   font-weight: 600;
-  border-radius: var(--radius-md);
   border: 1px solid transparent;
   cursor: pointer;
   transition: var(--transition);
@@ -148,7 +153,6 @@ h1, h2, h3, h4, h5, h6 {
 .card {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
   padding: 1.5rem;
   transition: var(--transition);
   overflow: hidden;
@@ -165,18 +169,40 @@ h1, h2, h3, h4, h5, h6 {
   gap: 1.5rem;
 }
 
-.grid-cols-1, .grid-cols-2, .grid-cols-3 { grid-template-columns: repeat(1, 1fr); }
+.grid-cols-1,
+.grid-cols-2,
+.grid-cols-3 {
+  grid-template-columns: repeat(1, 1fr);
+}
 
 @media (min-width: 768px) {
-  .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-  .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* Typography Helpers */
-.text-center { text-align: center; }
-.text-muted { color: var(--text-primary); opacity: 0.7; }
-.text-dim { color: var(--text-primary); opacity: 0.5; }
-.font-mono { font-family: var(--font-mono); }
+.text-center {
+  text-align: center;
+}
+
+.text-muted {
+  color: var(--text-primary);
+  opacity: 0.7;
+}
+
+.text-dim {
+  color: var(--text-primary);
+  opacity: 0.5;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
 
 /* Markdown & Article Typography */
 .prose {
@@ -184,7 +210,9 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.75;
 }
 
-.prose h1, .prose h2, .prose h3 {
+.prose h1,
+.prose h2,
+.prose h3 {
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
@@ -193,7 +221,8 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1.25rem;
 }
 
-.prose ul, .prose ol {
+.prose ul,
+.prose ol {
   margin-bottom: 1.25rem;
   padding-left: 1.5rem;
 }
@@ -207,7 +236,6 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--bg-subtle);
   color: var(--brand-sage);
   padding: 0.2rem 0.4rem;
-  border-radius: var(--radius-sm);
   font-size: 0.875em;
 }
 
@@ -215,7 +243,6 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
   padding: 1.25rem;
-  border-radius: var(--radius-md);
   overflow-x: auto;
   margin-bottom: 1.5rem;
 }
@@ -229,7 +256,6 @@ h1, h2, h3, h4, h5, h6 {
 .prose img {
   max-width: 100%;
   height: auto;
-  border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
   margin: 1.5rem 0;
 }

@@ -1,24 +1,24 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import { getCollection, render } from 'astro:content';
+import Layout from "../../layouts/Layout.astro"
+import { Image } from "astro:assets"
+import { getCollection, render } from "astro:content"
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getCollection("blog")
   return posts.map((post) => ({
     params: { slug: post.id },
     props: { post },
-  }));
+  }))
 }
 
-const { post } = Astro.props;
-const { Content } = await render(post);
+const { post } = Astro.props
+const { Content } = await render(post)
 
-const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+const formattedDate = new Date(post.data.date).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+})
 ---
 
 <Layout
@@ -27,9 +27,7 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
 >
   <article class="post-single-page">
     <div class="container container-readable">
-      <a href="/blog/" class="back-link">
-        &larr; Back to all articles
-      </a>
+      <a href="/blog/" class="back-link"> &larr; Back to all articles </a>
 
       <header class="post-header">
         <div class="post-meta">
@@ -40,17 +38,19 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
         <h1 class="post-title">{post.data.title}</h1>
       </header>
 
-      {post.data.featuredImage && (
-        <div class="featured-image-wrapper">
-          <Image
-            src={post.data.featuredImage}
-            alt={post.data.title}
-            width={800}
-            height={450}
-            class="featured-image"
-          />
-        </div>
-      )}
+      {
+        post.data.featuredImage && (
+          <div class="featured-image-wrapper">
+            <Image
+              src={post.data.featuredImage}
+              alt={post.data.title}
+              width={800}
+              height={450}
+              class="featured-image"
+            />
+          </div>
+        )
+      }
 
       <div class="prose post-body">
         <Content />
@@ -59,7 +59,10 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
       <div class="post-author-box">
         <div class="author-details">
           <h3>Written by Mateus Tavares</h3>
-          <p>Full-Stack Software Engineer based in Calgary, AB. Passionate about Ruby on Rails, React, TypeScript, and UI craft.</p>
+          <p>
+            Full-Stack Software Engineer based in Calgary, AB. Passionate about
+            Ruby on Rails, React, TypeScript, and UI craft.
+          </p>
         </div>
       </div>
     </div>
@@ -119,7 +122,6 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
 
   .featured-image-wrapper {
     margin-bottom: 2.5rem;
-    border-radius: 0.85rem;
     overflow: hidden;
     border: 1px solid var(--border-color);
   }

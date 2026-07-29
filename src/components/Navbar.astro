@@ -1,42 +1,60 @@
 ---
-const pathname = new URL(Astro.request.url).pathname;
+const pathname = new URL(Astro.request.url).pathname
 
 const navItems = [
-  { name: 'Home', href: '/' },
-  { name: 'Projects', href: '/projects/' },
-  { name: 'Blog', href: '/blog/' },
-  { name: 'About', href: '/about/' },
-];
+  { name: "Home", href: "/" },
+  { name: "Projects", href: "/projects/" },
+  { name: "Blog", href: "/blog/" },
+  { name: "About", href: "/about/" },
+]
 ---
 
 <header class="navbar-header">
   <div class="container navbar-container">
     <a href="/" class="brand">
-      <span class="brand-text">mattavares<span class="brand-accent">.com</span></span>
+      <span class="brand-text"
+        >mattavares<span class="brand-accent">.com</span></span
+      >
     </a>
 
-    <button class="mobile-toggle" aria-label="Toggle Navigation" aria-expanded="false" id="mobile-toggle">
-      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path class="menu-icon" d="M4 6h16M4 12h16M4 18h16" />
-        <path class="close-icon" d="M6 18L18 6M6 6l12 12" style="display: none;" />
+    <button
+      class="mobile-toggle"
+      aria-label="Toggle Navigation"
+      aria-expanded="false"
+      id="mobile-toggle"
+    >
+      <svg
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path class="menu-icon" d="M4 6h16M4 12h16M4 18h16"></path>
+        <path class="close-icon" d="M6 18L18 6M6 6l12 12" style="display: none;"
+        ></path>
       </svg>
     </button>
 
     <nav class="nav-links" id="nav-links">
-      {navItems.map((item) => {
-        const itemClean = item.href === '/' ? '/' : item.href.replace(/\/$/, '');
-        const pathClean = pathname === '/' ? '/' : pathname.replace(/\/$/, '');
-        const isActive = itemClean === '/' ? pathClean === '/' : pathClean.startsWith(itemClean);
-        
-        return (
-          <a
-            href={item.href}
-            class={`nav-link ${isActive ? 'active' : ''}`}
-          >
-            {item.name}
-          </a>
-        );
-      })}
+      {
+        navItems.map((item) => {
+          const itemClean =
+            item.href === "/" ? "/" : item.href.replace(/\/$/, "")
+          const pathClean = pathname === "/" ? "/" : pathname.replace(/\/$/, "")
+          const isActive =
+            itemClean === "/"
+              ? pathClean === "/"
+              : pathClean.startsWith(itemClean)
+
+          return (
+            <a href={item.href} class={`nav-link ${isActive ? "active" : ""}`}>
+              {item.name}
+            </a>
+          )
+        })
+      }
       <a href="/contact/" class="btn btn-primary btn-sm mobile-cta">Contact</a>
     </nav>
   </div>
@@ -44,49 +62,52 @@ const navItems = [
 
 <script>
   // Runs on initial load and after every View Transition navigation
-  document.addEventListener('astro:page-load', () => {
-    const toggleBtn = document.getElementById('mobile-toggle');
-    const navLinks = document.getElementById('nav-links');
-    const menuIcon = document.querySelector('.menu-icon') as SVGPathElement;
-    const closeIcon = document.querySelector('.close-icon') as SVGPathElement;
+  document.addEventListener("astro:page-load", () => {
+    const toggleBtn = document.getElementById("mobile-toggle")
+    const navLinks = document.getElementById("nav-links")
+    const menuIcon = document.querySelector(".menu-icon") as SVGPathElement
+    const closeIcon = document.querySelector(".close-icon") as SVGPathElement
 
     if (toggleBtn && navLinks && menuIcon && closeIcon) {
-      toggleBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent the document click listener from immediately firing
-        const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-        toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
-        navLinks.classList.toggle('is-open');
+      toggleBtn.addEventListener("click", (e) => {
+        e.stopPropagation() // Prevent the document click listener from immediately firing
+        const isExpanded = toggleBtn.getAttribute("aria-expanded") === "true"
+        toggleBtn.setAttribute("aria-expanded", String(!isExpanded))
+        navLinks.classList.toggle("is-open")
 
         if (!isExpanded) {
-          menuIcon.style.display = 'none';
-          closeIcon.style.display = 'block';
+          menuIcon.style.display = "none"
+          closeIcon.style.display = "block"
         } else {
-          menuIcon.style.display = 'block';
-          closeIcon.style.display = 'none';
+          menuIcon.style.display = "block"
+          closeIcon.style.display = "none"
         }
-      });
+      })
     }
-  });
+  })
 
   // A single global click listener to handle clicking outside.
   // By querying the DOM inside the event, we avoid adding duplicate listeners on route changes.
-  document.addEventListener('click', (event) => {
-    const toggleBtn = document.getElementById('mobile-toggle');
-    const navLinks = document.getElementById('nav-links');
-    const menuIcon = document.querySelector('.menu-icon') as SVGPathElement;
-    const closeIcon = document.querySelector('.close-icon') as SVGPathElement;
+  document.addEventListener("click", (event) => {
+    const toggleBtn = document.getElementById("mobile-toggle")
+    const navLinks = document.getElementById("nav-links")
+    const menuIcon = document.querySelector(".menu-icon") as SVGPathElement
+    const closeIcon = document.querySelector(".close-icon") as SVGPathElement
 
     if (toggleBtn && navLinks && menuIcon && closeIcon) {
-      if (!toggleBtn.contains(event.target as Node) && !navLinks.contains(event.target as Node)) {
-        if (navLinks.classList.contains('is-open')) {
-          toggleBtn.setAttribute('aria-expanded', 'false');
-          navLinks.classList.remove('is-open');
-          menuIcon.style.display = 'block';
-          closeIcon.style.display = 'none';
+      if (
+        !toggleBtn.contains(event.target as Node) &&
+        !navLinks.contains(event.target as Node)
+      ) {
+        if (navLinks.classList.contains("is-open")) {
+          toggleBtn.setAttribute("aria-expanded", "false")
+          navLinks.classList.remove("is-open")
+          menuIcon.style.display = "block"
+          closeIcon.style.display = "none"
         }
       }
     }
-  });
+  })
 </script>
 
 <style>
@@ -145,7 +166,7 @@ const navItems = [
     padding: 1rem 1.5rem 1.5rem 1.5rem;
     gap: 1rem;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    
+
     /* Hidden by default */
     opacity: 0;
     visibility: hidden;
@@ -230,16 +251,15 @@ const navItems = [
 
     .nav-link.active::after {
       display: block;
-      content: '';
+      content: "";
       position: absolute;
       bottom: -0.25rem;
       left: 0;
       right: 0;
       height: 2px;
       background-color: var(--brand-sage);
-      border-radius: 2px;
     }
-    
+
     .mobile-cta {
       margin-top: 0;
     }

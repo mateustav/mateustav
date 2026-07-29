@@ -1,28 +1,30 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import Layout from "../../layouts/Layout.astro"
+import { getCollection } from "astro:content"
 
-const allPosts = await getCollection('blog');
+const allPosts = await getCollection("blog")
 const publishedPosts = allPosts
   .filter((post) => !post.data.draft)
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+  .sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  )
 
 const formattedPosts = publishedPosts.map((post) => ({
   id: post.id,
   title: post.data.title,
   tag: post.data.tag ? `#${post.data.tag}` : null,
-  rawTag: post.data.tag ? post.data.tag.toLowerCase() : '',
-  formattedDate: new Date(post.data.date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+  rawTag: post.data.tag ? post.data.tag.toLowerCase() : "",
+  formattedDate: new Date(post.data.date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   }),
-  excerpt: (post.body || '').slice(0, 220).replace(/[#*`]/g, '') + '...',
-}));
+  excerpt: (post.body || "").slice(0, 220).replace(/[#*`]/g, "") + "...",
+}))
 
 const allTags = Array.from(
   new Set(publishedPosts.map((p) => p.data.tag).filter(Boolean))
-).sort();
+).sort()
 ---
 
 <Layout
@@ -34,76 +36,86 @@ const allTags = Array.from(
       <div class="page-header">
         <h1 class="page-title">Blog &amp; Articles</h1>
         <p class="page-subtitle">
-          Insights on full-stack web engineering, Ruby on Rails, frontend craft, and software experiments.
+          Insights on full-stack web engineering, Ruby on Rails, frontend craft,
+          and software experiments.
         </p>
       </div>
 
-      {allTags.length > 0 && (
-        <div class="tag-filter-bar">
-          <span class="filter-label">Filter:</span>
-          <button class="tag-btn active" data-tag="all">All Posts ({publishedPosts.length})</button>
-          {allTags.map((tag) => (
-            <button class="tag-btn" data-tag={tag ? tag.toLowerCase() : ''}>
-              #{tag}
+      {
+        allTags.length > 0 && (
+          <div class="tag-filter-bar">
+            <span class="filter-label">Filter:</span>
+            <button class="tag-btn active" data-tag="all">
+              All Posts ({publishedPosts.length})
             </button>
-          ))}
-        </div>
-      )}
+            {allTags.map((tag) => (
+              <button class="tag-btn" data-tag={tag ? tag.toLowerCase() : ""}>
+                #{tag}
+              </button>
+            ))}
+          </div>
+        )
+      }
 
-      {formattedPosts.length > 0 ? (
-        <div class="posts-list">
-          {formattedPosts.map((post) => (
-            <article class="post-item" data-tag={post.rawTag}>
-              <div class="post-header-line">
-                <time class="post-date">{post.formattedDate}</time>
-                {post.tag && <span class="badge">{post.tag}</span>}
-              </div>
+      {
+        formattedPosts.length > 0 ? (
+          <div class="posts-list">
+            {formattedPosts.map((post) => (
+              <article class="post-item" data-tag={post.rawTag}>
+                <div class="post-header-line">
+                  <time class="post-date">{post.formattedDate}</time>
+                  {post.tag && <span class="badge">{post.tag}</span>}
+                </div>
 
-              <h2 class="post-title">
-                <a href={`/blog/${post.id}/`}>{post.title}</a>
-              </h2>
+                <h2 class="post-title">
+                  <a href={`/blog/${post.id}/`}>{post.title}</a>
+                </h2>
 
-              <p class="post-excerpt">{post.excerpt}</p>
+                <p class="post-excerpt">{post.excerpt}</p>
 
-              <a href={`/blog/${post.id}/`} class="read-link">
-                Read Article &rarr;
-              </a>
-            </article>
-          ))}
-        </div>
-      ) : (
-        <div class="empty-blog-box">
-          <h3>Articles coming soon!</h3>
-          <p>I'm currently working on new write-ups about full-stack engineering, web performance, and software craft. Check back soon!</p>
-        </div>
-      )}
+                <a href={`/blog/${post.id}/`} class="read-link">
+                  Read Article &rarr;
+                </a>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div class="empty-blog-box">
+            <h3>Articles coming soon!</h3>
+            <p>
+              I'm currently working on new write-ups about full-stack
+              engineering, web performance, and software craft. Check back soon!
+            </p>
+          </div>
+        )
+      }
     </div>
   </div>
 </Layout>
 
 <script>
-  const tagBtns = document.querySelectorAll('.tag-btn');
-  const postItems = document.querySelectorAll('.post-item');
+  const tagBtns = document.querySelectorAll(".tag-btn")
+  const postItems = document.querySelectorAll(".post-item")
 
   tagBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      tagBtns.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
+    btn.addEventListener("click", () => {
+      tagBtns.forEach((b) => b.classList.remove("active"))
+      btn.classList.add("active")
 
-      const selectedTag = btn.getAttribute('data-tag');
+      const selectedTag = btn.getAttribute("data-tag")
 
       postItems.forEach((item) => {
-        const itemEl = item as HTMLElement;
-        const itemTag = itemEl.getAttribute('data-tag');
+        const itemEl = item as HTMLElement
+        const itemTag = itemEl.getAttribute("data-tag")
 
-        if (selectedTag === 'all' || itemTag === selectedTag) {
-          itemEl.style.display = 'block';
+        if (selectedTag === "all" || itemTag === selectedTag) {
+          itemEl.style.display = "block"
         } else {
-          itemEl.style.display = 'none';
+          itemEl.style.display = "none"
         }
-      });
-    });
-  });
+      })
+    })
+  })
 </script>
 
 <style>
@@ -150,7 +162,6 @@ const allTags = Array.from(
     color: var(--text-primary);
     border: 1px solid var(--border-color);
     padding: 0.4rem 0.85rem;
-    border-radius: 9999px;
     font-size: 0.8125rem;
     font-weight: 500;
     cursor: pointer;
@@ -179,7 +190,6 @@ const allTags = Array.from(
   .post-item {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: 0.85rem;
     padding: 2rem;
     transition: all 0.2s ease;
   }
@@ -236,7 +246,6 @@ const allTags = Array.from(
     text-align: center;
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: 0.85rem;
     padding: 3rem 2rem;
     max-width: 600px;
     margin: 0 auto;

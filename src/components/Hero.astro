@@ -1,6 +1,6 @@
 ---
-import { Image } from 'astro:assets';
-import profilePic from '../assets/images/icon.png';
+import { Image } from "astro:assets"
+import profilePic from "../assets/images/icon.png"
 ---
 
 <section class="hero-section">
@@ -10,33 +10,42 @@ import profilePic from '../assets/images/icon.png';
         <span class="status-dot"></span>
         Calgary, AB 🇨🇦
       </div>
-      
+
       <h1 class="hero-headline">
         Hi, I'm <span class="highlight">Mat</span>!
       </h1>
-      
+
       <p class="hero-subtitle">
-        I'm a <strong>Full-Stack Engineer</strong> currently at <strong>ZayZoon</strong>. Born in frontend development, I combine 4+ years of Ruby on Rails experience with modern React, TypeScript, and Node.js to build fast, intuitive web applications.
+        I'm a <strong>Full-Stack Engineer</strong> currently at <strong
+          >ZayZoon</strong
+        >. Born in frontend development, I combine 4+ years of Ruby on Rails
+        experience with modern React, TypeScript, and Node.js to build fast,
+        intuitive web applications.
       </p>
 
       <div class="hero-actions">
         <a href="/projects/" class="btn btn-primary">
           View Projects
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg
+            width="16"
+            height="16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg
+          >
         </a>
-        <a href="/about/" class="btn btn-secondary">
-          About Me
-        </a>
+        <a href="/about/" class="btn btn-secondary"> About Me </a>
       </div>
     </div>
 
     <div class="hero-avatar-wrapper">
       <div class="avatar-card">
-        <Image 
-          src={profilePic} 
-          alt="Mateus Tavares" 
-          width={280} 
-          height={280} 
+        <Image
+          src={profilePic}
+          alt="Mateus Tavares"
+          width={280}
+          height={280}
           class="hero-avatar"
           loading="eager"
         />
@@ -72,7 +81,6 @@ import profilePic from '../assets/images/icon.png';
     padding: 0.35rem 0.85rem;
     background-color: var(--bg-subtle);
     border: 1px solid var(--border-color);
-    border-radius: 9999px;
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--text-primary);
@@ -82,7 +90,6 @@ import profilePic from '../assets/images/icon.png';
   .status-dot {
     width: 8px;
     height: 8px;
-    border-radius: 50%;
     background-color: var(--brand-sage);
     display: inline-block;
   }
@@ -144,7 +151,6 @@ import profilePic from '../assets/images/icon.png';
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
     padding: 0;
-    border-radius: 1.25rem;
     overflow: hidden;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
     display: flex;
@@ -157,7 +163,6 @@ import profilePic from '../assets/images/icon.png';
     max-width: 280px;
     height: auto;
     display: block;
-    border-radius: 1.25rem;
     margin: 0;
   }
 </style>
