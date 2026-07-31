@@ -1,8 +1,8 @@
 ---
 featuredImage: ./images/vanish.png
 github: "https://github.com/mateustav/hide-cursor-on-playback"
-chrome: "#"
-firefox: "#"
+chrome: "https://chromewebstore.google.com/detail/ajoijgcmnbajmenieiiogkmgceeagoam?utm_source=item-share-cb"
+firefox: "https://addons.mozilla.org/en-US/firefox/addon/vanish-auto-pointer-hider/"
 order: 1
 tech: ["typescript", "chrome", "firefox", "jest"]
 title: "Vanish: Auto Pointer Hider"
