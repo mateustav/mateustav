@@ -57,7 +57,7 @@ const linkSvg = icon(faArrowUpRightFromSquare)?.html[0] || ""
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            class="btn btn-primary btn-sm icon-btn"
+            class="btn btn-secondary btn-sm icon-btn"
             aria-label="Visit Site"
             title="Visit Site"
           >
@@ -203,10 +203,13 @@ const linkSvg = icon(faArrowUpRightFromSquare)?.html[0] || ""
   }
 
   .icon-btn {
-    padding: 0.5rem;
+    width: 36px;
+    height: 36px;
+    padding: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
   }
 
   .icon-btn :global(svg) {
