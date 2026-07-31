@@ -57,7 +57,7 @@ const linkSvg = icon(faArrowUpRightFromSquare)?.html[0] || ""
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            class="btn btn-primary btn-sm"
+            class="btn btn-primary btn-sm icon-btn"
             aria-label="Visit Site"
             title="Visit Site"
           >
@@ -72,7 +72,7 @@ const linkSvg = icon(faArrowUpRightFromSquare)?.html[0] || ""
             href={chrome}
             target="_blank"
             rel="noopener noreferrer"
-            class="btn btn-secondary btn-sm"
+            class="btn btn-secondary btn-sm icon-btn"
             aria-label="Chrome Store"
             title="Chrome Store"
           >
@@ -87,7 +87,7 @@ const linkSvg = icon(faArrowUpRightFromSquare)?.html[0] || ""
             href={firefox}
             target="_blank"
             rel="noopener noreferrer"
-            class="btn btn-secondary btn-sm"
+            class="btn btn-secondary btn-sm icon-btn"
             aria-label="Firefox Add-ons"
             title="Firefox Add-ons"
           >
@@ -102,7 +102,7 @@ const linkSvg = icon(faArrowUpRightFromSquare)?.html[0] || ""
             href={github}
             target="_blank"
             rel="noopener noreferrer"
-            class="btn btn-secondary btn-sm"
+            class="btn btn-secondary btn-sm icon-btn"
             aria-label="GitHub Repository"
             title="GitHub Repository"
           >
@@ -200,5 +200,19 @@ const linkSvg = icon(faArrowUpRightFromSquare)?.html[0] || ""
   .btn-sm {
     padding: 0.45rem 0.85rem;
     font-size: 0.8125rem;
+  }
+
+  .icon-btn {
+    padding: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon-btn :global(svg) {
+    width: 18px;
+    height: 18px;
+    display: block;
+    fill: currentColor;
   }
 </style>
