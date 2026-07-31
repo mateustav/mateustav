@@ -17,6 +17,8 @@ const renderedProjects = await Promise.all(
       tech: project.data.tech,
       link: project.data.link,
       github: project.data.github,
+      chrome: project.data.chrome,
+      firefox: project.data.firefox,
       techListJson: JSON.stringify(
         project.data.tech.map((t) => t.toLowerCase())
       ),
