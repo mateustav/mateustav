@@ -58,9 +58,10 @@ const linkSvg = icon(faArrowUpRightFromSquare)?.html[0] || ""
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-primary btn-sm"
+            aria-label="Visit Site"
+            title="Visit Site"
           >
             <Fragment set:html={linkSvg} />
-            Visit Site
           </a>
         )
       }
@@ -72,9 +73,10 @@ const linkSvg = icon(faArrowUpRightFromSquare)?.html[0] || ""
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-secondary btn-sm"
+            aria-label="Chrome Store"
+            title="Chrome Store"
           >
             <Fragment set:html={chromeSvg} />
-            Chrome
           </a>
         )
       }
@@ -86,9 +88,10 @@ const linkSvg = icon(faArrowUpRightFromSquare)?.html[0] || ""
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-secondary btn-sm"
+            aria-label="Firefox Add-ons"
+            title="Firefox Add-ons"
           >
             <Fragment set:html={firefoxSvg} />
-            Firefox
           </a>
         )
       }
@@ -100,9 +103,10 @@ const linkSvg = icon(faArrowUpRightFromSquare)?.html[0] || ""
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-secondary btn-sm"
+            aria-label="GitHub Repository"
+            title="GitHub Repository"
           >
             <Fragment set:html={githubSvg} />
-            GitHub
           </a>
         )
       }
