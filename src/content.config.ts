@@ -8,6 +8,8 @@ const projects = defineCollection({
     featuredImage: image().optional(),
     link: z.string().optional(),
     github: z.string().optional(),
+    chrome: z.string().optional(),
+    firefox: z.string().optional(),
     order: z.number().default(99),
     tech: z.array(z.string()).default([]),
   }),
