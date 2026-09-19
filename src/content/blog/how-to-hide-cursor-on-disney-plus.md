@@ -185,8 +185,8 @@ You just need to install my browser extension. Once installed, it runs silently 
 
 ### Download Links:
 
-- 🌐 **[Download for Google Chrome](https://chromewebstore.google.com/detail/ajoijgcmnbajmenieiiogkmgceeagoam?utm_source=item-share-cb)**
-- 🦊 **[Download for Mozilla Firefox](https://addons.mozilla.org/en-US/firefox/addon/vanish-auto-pointer-hider/)**
+- 🌐 **[Download for Google Chrome](https://chromewebstore.google.com/detail/ajoijgcmnbajmenieiiogkmgceeagoam?utm_source=mattavares.com&utm_medium=blog&utm_campaign=how-to-hide-cursor-on-disney-plus)**
+- 🦊 **[Download for Mozilla Firefox](https://addons.mozilla.org/en-US/firefox/addon/vanish-auto-pointer-hider/?utm_source=mattavares.com&utm_medium=blog&utm_campaign=how-to-hide-cursor-on-disney-plus)**
 - 💻 **[View Source on GitHub](https://github.com/mateustav/hide-cursor-on-playback)**
 
 _(While this works in your browser on macOS, Windows, and Linux, note that if you are using the Disney+ native desktop app, browser extensions cannot modify it. Like I mentioned earlier, I'm hoping Disney adds native cursor hiding to their app soon!)_
