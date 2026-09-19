@@ -3,15 +3,36 @@
 ---
 
 <form id="contact-form" action="/api/submit" method="POST" class="contact-form">
-  <!-- Honeypot field to prevent spam bots -->
-  <div class="form-group honeypot" style="display: none;">
-    <label for="bot_field">Leave this field blank</label>
+  <!-- Honeypot & anti-bot traps (visually hidden off-screen, avoid display:none which bots detect) -->
+  <div class="sr-trap" aria-hidden="true">
+    <label for="website">Website</label>
+    <input
+      type="text"
+      id="website"
+      name="website"
+      tabindex="-1"
+      autocomplete="off"
+    />
+    <label for="phone_number">Phone Number</label>
+    <input
+      type="tel"
+      id="phone_number"
+      name="phone_number"
+      tabindex="-1"
+      autocomplete="off"
+    />
     <input
       type="text"
       id="bot_field"
       name="bot_field"
       tabindex="-1"
       autocomplete="off"
+    />
+    <input
+      type="hidden"
+      id="form_load_time"
+      name="form_load_time"
+      value=""
     />
   </div>
 
@@ -50,6 +71,15 @@
       class="form-control"></textarea>
   </div>
 
+  <div class="form-group turnstile-container">
+    <div
+      class="cf-turnstile"
+      data-sitekey="0x4AAAAAAE9SyXuM57uBV3Vx"
+      data-action="contact"
+      data-theme="auto"
+    ></div>
+  </div>
+
   <div class="form-actions">
     <button type="submit" id="submit-btn" class="btn btn-primary">
       <svg
@@ -67,10 +97,34 @@
   <div id="form-status" class="form-status"></div>
 </form>
 
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 <script>
   const form = document.getElementById("contact-form") as HTMLFormElement
   const statusDiv = document.getElementById("form-status") as HTMLDivElement
   const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement
+  const loadTimeInput = document.getElementById("form_load_time") as HTMLInputElement
+
+  // Initialize load timestamp for anti-bot time-trap
+  if (loadTimeInput) {
+    loadTimeInput.value = Date.now().toString()
+  }
+
+  // Handle client-side transitions in Astro (ClientRouter)
+  document.addEventListener("astro:page-load", () => {
+    if (typeof (window as any).turnstile !== "undefined") {
+      const widgetEl = document.querySelector(".cf-turnstile")
+      if (widgetEl && !widgetEl.hasChildNodes()) {
+        try {
+          ;(window as any).turnstile.render(widgetEl, {
+            sitekey: "0x4AAAAAAE9SyXuM57uBV3Vx",
+            action: "contact",
+            theme: "auto",
+          })
+        } catch {}
+      }
+    }
+  })
 
   if (form) {
     form.addEventListener("submit", async (e) => {
@@ -103,6 +157,9 @@
               "Thank you! Your message was sent successfully."
           }
           form.reset()
+          if (loadTimeInput) {
+            loadTimeInput.value = Date.now().toString()
+          }
         } else {
           if (statusDiv) {
             statusDiv.className = "form-status status-error"
@@ -118,12 +175,31 @@
         }
       } finally {
         if (submitBtn) submitBtn.disabled = false
+        // Turnstile tokens are single-use; reset widget for any subsequent attempts
+        if (typeof (window as any).turnstile !== "undefined") {
+          try {
+            ;(window as any).turnstile.reset()
+          } catch {}
+        }
       }
     })
   }
 </script>
 
 <style>
+  /* Visually hide anti-bot decoy fields without triggering bot display:none heuristics */
+  .sr-trap {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    user-select: none;
+  }
+
   .contact-form {
     display: flex;
     flex-direction: column;
