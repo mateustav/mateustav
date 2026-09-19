@@ -1,0 +1,351 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Pagination from "./Pagination.astro"
+import { Image } from "astro:assets"
+
+interface Props {
+  posts: any[]
+  allTags: string[]
+  currentPage: number
+  totalPages: number
+  totalPosts: number
+  prevUrl?: string | null
+  nextUrl?: string | null
+}
+
+const {
+  posts,
+  allTags,
+  currentPage,
+  totalPages,
+  totalPosts,
+  prevUrl,
+  nextUrl,
+} = Astro.props
+
+const formattedPosts = posts.map((post) => {
+  const wordCount = (post.body || "").split(/\s+/).filter(Boolean).length
+  const readingTime = Math.max(1, Math.ceil(wordCount / 200))
+  const excerpt =
+    post.data.description ||
+    (post.body || "").slice(0, 220).replace(/[#*`]/g, "") + "..."
+
+  return {
+    id: post.id,
+    title: post.data.title,
+    tag: post.data.tag ? `#${post.data.tag}` : null,
+    rawTag: post.data.tag ? post.data.tag.toLowerCase() : "",
+    featuredImage: post.data.featuredImage,
+    readingTime,
+    formattedDate: new Date(post.data.date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }),
+    excerpt,
+  }
+})
+---
+
+<Layout
+  title={currentPage > 1
+    ? `Blog & Articles — Page ${currentPage} | Mateus Tavares`
+    : "Blog & Articles | Mateus Tavares"}
+  description="Technical deep dives, tutorials, and insights on full-stack web engineering, browser extensions, and UI craft."
+>
+  <div class="blog-page">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="page-title">Blog &amp; Articles</h1>
+        <p class="page-subtitle">
+          Insights on full-stack web engineering, browser extensions, UI craft,
+          and software experiments.
+        </p>
+      </div>
+
+      {
+        allTags.length > 0 && (
+          <div class="tag-filter-bar">
+            <span class="filter-label">Filter:</span>
+            <button class="tag-btn active" data-tag="all">
+              All Posts ({totalPosts})
+            </button>
+            {allTags.map((tag) => (
+              <button class="tag-btn" data-tag={tag ? tag.toLowerCase() : ""}>
+                #{tag}
+              </button>
+            ))}
+          </div>
+        )
+      }
+
+      {
+        formattedPosts.length > 0 ? (
+          <div class="posts-list">
+            {formattedPosts.map((post) => (
+              <article class="post-item" data-tag={post.rawTag}>
+                {post.featuredImage && (
+                  <a href={`/blog/${post.id}/`} class="post-thumbnail-link">
+                    <Image
+                      src={post.featuredImage}
+                      alt={post.title}
+                      width={760}
+                      height={400}
+                      class="post-thumbnail"
+                    />
+                  </a>
+                )}
+
+                <div class="post-content">
+                  <div class="post-header-line">
+                    <time class="post-date">{post.formattedDate}</time>
+                    <span class="meta-dot">&bull;</span>
+                    <span class="reading-time">{post.readingTime} min read</span>
+                    {post.tag && <span class="badge">{post.tag}</span>}
+                  </div>
+
+                  <h2 class="post-title">
+                    <a href={`/blog/${post.id}/`}>{post.title}</a>
+                  </h2>
+
+                  <p class="post-excerpt">{post.excerpt}</p>
+
+                  <a href={`/blog/${post.id}/`} class="read-link">
+                    Read Article &rarr;
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div class="empty-blog-box">
+            <h3>Articles coming soon!</h3>
+            <p>
+              I'm currently working on new write-ups about full-stack
+              engineering, web performance, and software craft. Check back soon!
+            </p>
+          </div>
+        )
+      }
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        prevUrl={prevUrl}
+        nextUrl={nextUrl}
+        basePath="/blog"
+      />
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const tagBtns = document.querySelectorAll(".tag-btn")
+  const postItems = document.querySelectorAll(".post-item")
+
+  tagBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      tagBtns.forEach((b) => b.classList.remove("active"))
+      btn.classList.add("active")
+
+      const selectedTag = btn.getAttribute("data-tag")
+
+      postItems.forEach((item) => {
+        const itemEl = item as HTMLElement
+        const itemTag = itemEl.getAttribute("data-tag")
+
+        if (selectedTag === "all" || itemTag === selectedTag) {
+          itemEl.style.display = "block"
+        } else {
+          itemEl.style.display = "none"
+        }
+      })
+    })
+  })
+</script>
+
+<style>
+  .blog-page {
+    padding: 3.5rem 0 5rem 0;
+  }
+
+  .page-header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 3rem auto;
+  }
+
+  .page-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-subtitle {
+    color: var(--text-primary);
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .tag-filter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .filter-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-right: 0.5rem;
+  }
+
+  .tag-btn {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 0.4rem 0.85rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .tag-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--brand-sage);
+  }
+
+  .tag-btn.active {
+    background-color: var(--brand-sage);
+    color: var(--text-on-accent);
+    border-color: var(--brand-sage);
+    font-weight: 600;
+  }
+
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .post-item {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+
+  .post-item:hover {
+    border-color: var(--brand-sage);
+    background-color: var(--bg-subtle);
+  }
+
+  .post-thumbnail-link {
+    display: block;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-color);
+    max-height: 360px;
+  }
+
+  .post-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .post-item:hover .post-thumbnail {
+    transform: scale(1.02);
+  }
+
+  .post-content {
+    padding: 2rem;
+  }
+
+  .post-header-line {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .post-date,
+  .reading-time {
+    font-size: 0.8125rem;
+    color: var(--text-primary);
+    opacity: 0.8;
+  }
+
+  .meta-dot {
+    color: var(--text-primary);
+    opacity: 0.4;
+    font-size: 0.8125rem;
+  }
+
+  .post-title {
+    font-size: 1.55rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 0.85rem;
+  }
+
+  .post-title a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .post-title a:hover {
+    color: var(--brand-sage);
+  }
+
+  .post-excerpt {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+    opacity: 0.9;
+  }
+
+  .read-link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--brand-sage);
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .read-link:hover {
+    color: var(--brand-sage-hover);
+    text-decoration: underline;
+  }
+
+  .empty-blog-box {
+    text-align: center;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 3rem 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .empty-blog-box h3 {
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .empty-blog-box p {
+    color: var(--text-primary);
+    opacity: 0.8;
+  }
+</style>

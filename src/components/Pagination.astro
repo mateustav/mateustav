@@ -1,0 +1,176 @@
+---
+interface Props {
+  currentPage: number
+  totalPages: number
+  prevUrl?: string | null
+  nextUrl?: string | null
+  basePath?: string
+}
+
+const {
+  currentPage,
+  totalPages,
+  prevUrl,
+  nextUrl,
+  basePath = "/blog",
+} = Astro.props
+
+// Helper to construct page URLs
+function getPageUrl(pageNum: number): string {
+  if (pageNum === 1) {
+    return `${basePath}/`
+  }
+  return `${basePath}/page/${pageNum}/`
+}
+
+// Generate pagination page numbers
+const pages: (number | string)[] = []
+if (totalPages <= 7) {
+  for (let i = 1; i <= totalPages; i++) {
+    pages.push(i)
+  }
+} else {
+  pages.push(1)
+  if (currentPage > 3) {
+    pages.push("...")
+  }
+  const start = Math.max(2, currentPage - 1)
+  const end = Math.min(totalPages - 1, currentPage + 1)
+  for (let i = start; i <= end; i++) {
+    pages.push(i)
+  }
+  if (currentPage < totalPages - 2) {
+    pages.push("...")
+  }
+  pages.push(totalPages)
+}
+---
+
+{
+  totalPages > 1 && (
+    <nav class="pagination" aria-label="Blog pagination">
+      {prevUrl ? (
+        <a href={prevUrl} class="page-nav prev" aria-label="Previous page">
+          &larr; Previous
+        </a>
+      ) : (
+        <span class="page-nav prev disabled" aria-hidden="true">
+          &larr; Previous
+        </span>
+      )}
+
+      <ul class="page-numbers">
+        {pages.map((p) => (
+          <li>
+            {typeof p === "number" ? (
+              <a
+                href={getPageUrl(p)}
+                class={`page-number ${p === currentPage ? "active" : ""}`}
+                aria-current={p === currentPage ? "page" : undefined}
+                aria-label={`Go to page ${p}`}
+              >
+                {p}
+              </a>
+            ) : (
+              <span class="page-ellipsis">{p}</span>
+            )}
+          </li>
+        ))}
+      </ul>
+
+      {nextUrl ? (
+        <a href={nextUrl} class="page-nav next" aria-label="Next page">
+          Next &rarr;
+        </a>
+      ) : (
+        <span class="page-nav next disabled" aria-hidden="true">
+          Next &rarr;
+        </span>
+      )}
+    </nav>
+  )
+}
+
+<style>
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .page-numbers {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .page-nav {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 0.85rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+    transition: var(--transition);
+  }
+
+  .page-nav:not(.disabled):hover {
+    color: var(--brand-sage);
+    border-color: var(--brand-sage);
+  }
+
+  .page-nav.disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  .page-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+    transition: var(--transition);
+  }
+
+  .page-number:hover {
+    color: var(--brand-sage);
+    border-color: var(--brand-sage);
+  }
+
+  .page-number.active {
+    background-color: var(--brand-sage);
+    color: var(--text-on-accent);
+    border-color: var(--brand-sage);
+    font-weight: 700;
+  }
+
+  .page-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 36px;
+    color: var(--text-primary);
+    opacity: 0.5;
+    font-size: 0.875rem;
+  }
+</style>

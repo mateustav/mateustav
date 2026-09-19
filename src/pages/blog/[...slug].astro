@@ -5,7 +5,10 @@ import { getCollection, render } from "astro:content"
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog")
-  return posts.map((post) => ({
+  const publishedPosts = posts.filter(
+    (post) => import.meta.env.DEV || !post.data.draft
+  )
+  return publishedPosts.map((post) => ({
     params: { slug: post.id },
     props: { post },
   }))
@@ -19,11 +22,14 @@ const formattedDate = new Date(post.data.date).toLocaleDateString("en-US", {
   month: "long",
   day: "numeric",
 })
+
+const wordCount = (post.body || "").split(/\s+/).filter(Boolean).length
+const readingTime = Math.max(1, Math.ceil(wordCount / 200))
 ---
 
 <Layout
   title={`${post.data.title} | Mateus Tavares`}
-  description={post.body ? post.body.slice(0, 160) : post.data.title}
+  description={post.data.description || (post.body ? post.body.slice(0, 160) : post.data.title)}
 >
   <article class="post-single-page">
     <div class="container container-readable">
@@ -32,10 +38,15 @@ const formattedDate = new Date(post.data.date).toLocaleDateString("en-US", {
       <header class="post-header">
         <div class="post-meta">
           <time class="post-date">{formattedDate}</time>
+          <span class="meta-dot">&bull;</span>
+          <span class="reading-time">{readingTime} min read</span>
           {post.data.tag && <span class="badge">#{post.data.tag}</span>}
         </div>
 
         <h1 class="post-title">{post.data.title}</h1>
+        {post.data.description && (
+          <p class="post-subtitle">{post.data.description}</p>
+        )}
       </header>
 
       {
@@ -58,10 +69,10 @@ const formattedDate = new Date(post.data.date).toLocaleDateString("en-US", {
 
       <div class="post-author-box">
         <div class="author-details">
-          <h3>Written by Mateus Tavares</h3>
+          <h3>Written by <a href="/about/">Mateus Tavares</a></h3>
           <p>
             Full-Stack Software Engineer based in Calgary, AB. Passionate about
-            Ruby on Rails, React, TypeScript, and UI craft.
+            TypeScript, React, Ruby on Rails, browser extensions, and UI craft.
           </p>
         </div>
       </div>
@@ -102,9 +113,17 @@ const formattedDate = new Date(post.data.date).toLocaleDateString("en-US", {
     margin-bottom: 1rem;
   }
 
-  .post-date {
+  .post-date,
+  .reading-time {
     font-size: 0.875rem;
     color: var(--text-primary);
+    opacity: 0.8;
+  }
+
+  .meta-dot {
+    color: var(--text-primary);
+    opacity: 0.4;
+    font-size: 0.875rem;
   }
 
   .post-title {
@@ -118,6 +137,14 @@ const formattedDate = new Date(post.data.date).toLocaleDateString("en-US", {
     .post-title {
       font-size: 2.5rem;
     }
+  }
+
+  .post-subtitle {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    opacity: 0.85;
+    margin-top: 0.85rem;
   }
 
   .featured-image-wrapper {
@@ -151,6 +178,15 @@ const formattedDate = new Date(post.data.date).toLocaleDateString("en-US", {
     font-weight: 700;
     margin-bottom: 0.35rem;
     color: var(--text-primary);
+  }
+
+  .author-details a {
+    color: var(--brand-sage);
+    text-decoration: none;
+  }
+
+  .author-details a:hover {
+    text-decoration: underline;
   }
 
   .author-details p {
