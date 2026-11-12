@@ -108,7 +108,7 @@ const recentPosts = allPosts
                   {post.tag && <span class="badge">#{post.tag}</span>}
                 </div>
                 <h3 class="post-title">{post.title}</h3>
-                <span class="read-more">Read article &rarr;</span>
+                <span class="read-more">Read article <span class="visually-hidden">about {post.title}</span>&rarr;</span>
               </a>
             ))}
           </div>
@@ -124,9 +124,9 @@ const recentPosts = allPosts
   }
 
   .alt-bg {
-    background-color: #0d131f;
-    border-top: 1px solid var(--bg-subtle);
-    border-bottom: 1px solid var(--bg-subtle);
+    background-color: var(--bg-alt);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
   }
 
   .section-header-flex {
@@ -178,14 +178,23 @@ const recentPosts = allPosts
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: all 0.2s ease;
+    transition: var(--transition);
     text-decoration: none;
   }
 
   .post-preview-card:hover {
     border-color: var(--brand-sage);
     background-color: var(--bg-subtle);
-    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .post-preview-card {
+      transition: var(--transition), transform 0.2s ease;
+    }
+
+    .post-preview-card:hover {
+      transform: translateY(-2px);
+    }
   }
 
   .post-meta {

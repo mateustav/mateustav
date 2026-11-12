@@ -18,12 +18,15 @@ const navItems = [
     </a>
 
     <button
+      type="button"
       class="mobile-toggle"
       aria-label="Toggle Navigation"
       aria-expanded="false"
+      aria-controls="nav-links"
       id="mobile-toggle"
     >
       <svg
+        aria-hidden="true"
         width="24"
         height="24"
         fill="none"
@@ -37,7 +40,7 @@ const navItems = [
       </svg>
     </button>
 
-    <nav class="nav-links" id="nav-links">
+    <nav class="nav-links" id="nav-links" aria-label="Primary">
       {
         navItems.map((item) => {
           const itemClean =
@@ -49,7 +52,11 @@ const navItems = [
               : pathClean.startsWith(itemClean)
 
           return (
-            <a href={item.href} class={`nav-link ${isActive ? "active" : ""}`}>
+            <a
+              href={item.href}
+              class={`nav-link ${isActive ? "active" : ""}`}
+              aria-current={isActive ? "page" : undefined}
+            >
               {item.name}
             </a>
           )
@@ -61,12 +68,26 @@ const navItems = [
 </header>
 
 <script>
+  const closeMenu = () => {
+    const toggleBtn = document.getElementById("mobile-toggle")
+    const navLinks = document.getElementById("nav-links")
+    const menuIcon = document.querySelector(".menu-icon") as SVGPathElement | null
+    const closeIcon = document.querySelector(".close-icon") as SVGPathElement | null
+
+    if (toggleBtn && navLinks && menuIcon && closeIcon && navLinks.classList.contains("is-open")) {
+      toggleBtn.setAttribute("aria-expanded", "false")
+      navLinks.classList.remove("is-open")
+      menuIcon.style.display = "block"
+      closeIcon.style.display = "none"
+    }
+  }
+
   // Runs on initial load and after every View Transition navigation
   document.addEventListener("astro:page-load", () => {
     const toggleBtn = document.getElementById("mobile-toggle")
     const navLinks = document.getElementById("nav-links")
-    const menuIcon = document.querySelector(".menu-icon") as SVGPathElement
-    const closeIcon = document.querySelector(".close-icon") as SVGPathElement
+    const menuIcon = document.querySelector(".menu-icon") as SVGPathElement | null
+    const closeIcon = document.querySelector(".close-icon") as SVGPathElement | null
 
     if (toggleBtn && navLinks && menuIcon && closeIcon) {
       toggleBtn.addEventListener("click", (e) => {
@@ -86,26 +107,29 @@ const navItems = [
     }
   })
 
-  // A single global click listener to handle clicking outside.
-  // By querying the DOM inside the event, we avoid adding duplicate listeners on route changes.
+  // Single global listeners avoid duplicate registrations on route changes.
   document.addEventListener("click", (event) => {
     const toggleBtn = document.getElementById("mobile-toggle")
     const navLinks = document.getElementById("nav-links")
-    const menuIcon = document.querySelector(".menu-icon") as SVGPathElement
-    const closeIcon = document.querySelector(".close-icon") as SVGPathElement
 
-    if (toggleBtn && navLinks && menuIcon && closeIcon) {
+    if (toggleBtn && navLinks) {
       if (
         !toggleBtn.contains(event.target as Node) &&
         !navLinks.contains(event.target as Node)
       ) {
-        if (navLinks.classList.contains("is-open")) {
-          toggleBtn.setAttribute("aria-expanded", "false")
-          navLinks.classList.remove("is-open")
-          menuIcon.style.display = "block"
-          closeIcon.style.display = "none"
-        }
+        closeMenu()
       }
+    }
+  })
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return
+    const toggleBtn = document.getElementById("mobile-toggle")
+    const navLinks = document.getElementById("nav-links")
+    if (navLinks?.classList.contains("is-open")) {
+      const focusInside = navLinks.contains(document.activeElement)
+      closeMenu()
+      if (focusInside) toggleBtn?.focus()
     }
   })
 </script>
@@ -124,7 +148,7 @@ const navItems = [
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 4.5rem;
+    min-block-size: 4.5rem;
     position: relative;
   }
 
@@ -145,6 +169,8 @@ const navItems = [
     display: flex;
     align-items: center;
     justify-content: center;
+    min-inline-size: 44px;
+    min-block-size: 44px;
     background: none;
     border: none;
     color: var(--text-primary);
@@ -155,7 +181,7 @@ const navItems = [
 
   .nav-links {
     position: absolute;
-    top: 4.5rem;
+    top: 100%;
     left: 0;
     right: 0;
     background-color: var(--bg-app);
@@ -170,9 +196,14 @@ const navItems = [
     /* Hidden by default */
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.2s ease-in-out;
     z-index: 99;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .nav-links {
+      transform: translateY(-10px);
+      transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out, visibility 0.2s ease-in-out;
+    }
   }
 
   .nav-links.is-open {

@@ -47,14 +47,14 @@ const allTechs = Array.from(
       </div>
 
       <!-- Filter Bar -->
-      <div class="filter-container">
+      <div class="filter-container" role="group" aria-label="Filter projects by technology">
         <span class="filter-label">Filter by Tech:</span>
-        <button class="filter-btn active" data-filter="all"
+        <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true"
           >All ({allProjects.length})</button
         >
         {
           allTechs.map((tech) => (
-            <button class="filter-btn" data-filter={tech.toLowerCase()}>
+            <button type="button" class="filter-btn" data-filter={tech.toLowerCase()} aria-pressed="false">
               {tech}
             </button>
           ))
@@ -85,25 +85,31 @@ const allTechs = Array.from(
 </Layout>
 
 <script>
-  const filterBtns = document.querySelectorAll(".filter-btn")
-  const projectWrappers = document.querySelectorAll(".project-wrapper")
+  document.addEventListener("astro:page-load", () => {
+    const filterBtns = document.querySelectorAll(".filter-btn")
+    const projectWrappers = document.querySelectorAll(".project-wrapper")
 
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      filterBtns.forEach((b) => b.classList.remove("active"))
-      btn.classList.add("active")
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filterBtns.forEach((b) => {
+          b.classList.remove("active")
+          b.setAttribute("aria-pressed", "false")
+        })
+        btn.classList.add("active")
+        btn.setAttribute("aria-pressed", "true")
 
-      const filter = btn.getAttribute("data-filter")
+        const filter = btn.getAttribute("data-filter")
 
-      projectWrappers.forEach((wrapper) => {
-        const wrapperEl = wrapper as HTMLElement
-        const techList = JSON.parse(wrapperEl.getAttribute("data-tech") || "[]")
+        projectWrappers.forEach((wrapper) => {
+          const wrapperEl = wrapper as HTMLElement
+          const techList = JSON.parse(wrapperEl.getAttribute("data-tech") || "[]")
 
-        if (filter === "all" || techList.includes(filter)) {
-          wrapperEl.style.display = "block"
-        } else {
-          wrapperEl.style.display = "none"
-        }
+          if (filter === "all" || techList.includes(filter)) {
+            wrapperEl.style.display = "block"
+          } else {
+            wrapperEl.style.display = "none"
+          }
+        })
       })
     })
   })
@@ -167,7 +173,7 @@ const allTechs = Array.from(
 
   .filter-btn.active {
     background-color: var(--brand-sage);
-    color: var(--text-primary);
+    color: var(--text-on-accent);
     border-color: var(--brand-sage);
   }
 
