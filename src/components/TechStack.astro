@@ -73,8 +73,6 @@ const technologies = [
     svg: getSvg(faWordpress),
   },
 ]
-
-const duplicatedTech = [...technologies, ...technologies]
 ---
 
 <section class="tech-section">
@@ -114,11 +112,11 @@ const duplicatedTech = [...technologies, ...technologies]
       </div>
     </div>
 
-    <!-- Mobile Zero-JS Pure CSS Infinite Carousel -->
-    <div class="tech-mobile-carousel">
+    <!-- Mobile Zero-JS Pure CSS Infinite Carousel (with accessible pause control) -->
+    <div class="tech-mobile-carousel" id="tech-mobile-carousel">
       <div class="carousel-track">
         {
-          duplicatedTech.map((tech) => (
+          technologies.map((tech) => (
             <div class="tech-card carousel-card" title={tech.name}>
               <div class="tech-icon-container" style={`color: ${tech.color}`}>
                 <Fragment set:html={tech.svg} />
@@ -127,10 +125,46 @@ const duplicatedTech = [...technologies, ...technologies]
             </div>
           ))
         }
+        {
+          technologies.map((tech) => (
+            <div
+              class="tech-card carousel-card carousel-duplicate"
+              aria-hidden="true"
+            >
+              <div class="tech-icon-container" style={`color: ${tech.color}`}>
+                <Fragment set:html={tech.svg} />
+              </div>
+              <span class="tech-name">{tech.name}</span>
+            </div>
+          ))
+        }
+      </div>
+      <div class="carousel-controls">
+        <button
+          type="button"
+          class="carousel-toggle"
+          id="tech-carousel-toggle"
+        >
+          Pause
+        </button>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const carousel = document.getElementById("tech-mobile-carousel")
+    const toggleBtn = document.getElementById("tech-carousel-toggle")
+    if (!carousel || !toggleBtn) return
+
+    toggleBtn.addEventListener("click", () => {
+      const paused = carousel.dataset.paused === "true"
+      carousel.dataset.paused = String(!paused)
+      toggleBtn.textContent = paused ? "Pause" : "Play"
+    })
+  })
+</script>
 
 <style>
   .tech-section {
@@ -179,14 +213,23 @@ const duplicatedTech = [...technologies, ...technologies]
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    transition: all 0.2s ease;
+    transition: var(--transition);
     flex-shrink: 0;
   }
 
   .tech-card:hover {
     border-color: var(--brand-sage);
     background-color: var(--bg-subtle);
-    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tech-card {
+      transition: var(--transition), transform 0.2s ease;
+    }
+
+    .tech-card:hover {
+      transform: translateY(-2px);
+    }
   }
 
   .tech-icon-container {
@@ -222,33 +265,78 @@ const duplicatedTech = [...technologies, ...technologies]
     display: block;
     width: 100%;
     overflow: hidden;
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      black 10%,
-      black 90%,
-      transparent
-    );
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent,
-      black 10%,
-      black 90%,
-      transparent
-    );
     padding: 0.5rem 0;
   }
 
   .carousel-track {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1rem;
-    width: max-content;
-    animation: infinite-scroll 25s linear infinite;
+    width: 100%;
   }
 
-  .carousel-track:hover,
-  .carousel-track:active {
-    animation-play-state: paused;
+  .carousel-duplicate,
+  .carousel-controls {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tech-mobile-carousel {
+      mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent
+      );
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent
+      );
+    }
+    .carousel-track {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      width: max-content;
+      animation: infinite-scroll 25s linear infinite;
+    }
+
+    .carousel-duplicate {
+      display: flex;
+    }
+
+    .carousel-controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 0.75rem;
+    }
+
+    .carousel-toggle {
+      min-block-size: 36px;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .carousel-toggle:hover {
+      border-color: var(--brand-sage);
+      color: var(--brand-sage);
+    }
+
+    .tech-mobile-carousel[data-paused="true"] .carousel-track,
+    .carousel-track:hover,
+    .carousel-track:active {
+      animation-play-state: paused;
+    }
   }
 
   .carousel-card {

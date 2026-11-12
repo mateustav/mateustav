@@ -62,13 +62,13 @@ const formattedPosts = posts.map((post) => {
 
       {
         allTags.length > 0 && (
-          <div class="tag-filter-bar">
+          <div class="tag-filter-bar" role="group" aria-label="Filter articles by tag">
             <span class="filter-label">Filter:</span>
-            <button class="tag-btn active" data-tag="all">
+            <button type="button" class="tag-btn active" data-tag="all" aria-pressed="true">
               All Posts ({totalPosts})
             </button>
             {allTags.map((tag) => (
-              <button class="tag-btn" data-tag={tag ? tag.toLowerCase() : ""}>
+              <button type="button" class="tag-btn" data-tag={tag ? tag.toLowerCase() : ""} aria-pressed="false">
                 #{tag}
               </button>
             ))}
@@ -106,7 +106,7 @@ const formattedPosts = posts.map((post) => {
                   <p class="post-excerpt">{post.excerpt}</p>
 
                   <a href={`/blog/${post.id}/`} class="read-link">
-                    Read Article &rarr;
+                    Read Article <span class="visually-hidden">about {post.title}</span>&rarr;
                   </a>
                 </div>
               </article>
@@ -135,25 +135,31 @@ const formattedPosts = posts.map((post) => {
 </Layout>
 
 <script>
-  const tagBtns = document.querySelectorAll(".tag-btn")
-  const postItems = document.querySelectorAll(".post-item")
+  document.addEventListener("astro:page-load", () => {
+    const tagBtns = document.querySelectorAll(".tag-btn")
+    const postItems = document.querySelectorAll(".post-item")
 
-  tagBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      tagBtns.forEach((b) => b.classList.remove("active"))
-      btn.classList.add("active")
+    tagBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        tagBtns.forEach((b) => {
+          b.classList.remove("active")
+          b.setAttribute("aria-pressed", "false")
+        })
+        btn.classList.add("active")
+        btn.setAttribute("aria-pressed", "true")
 
-      const selectedTag = btn.getAttribute("data-tag")
+        const selectedTag = btn.getAttribute("data-tag")
 
-      postItems.forEach((item) => {
-        const itemEl = item as HTMLElement
-        const itemTag = itemEl.getAttribute("data-tag")
+        postItems.forEach((item) => {
+          const itemEl = item as HTMLElement
+          const itemTag = itemEl.getAttribute("data-tag")
 
-        if (selectedTag === "all" || itemTag === selectedTag) {
-          itemEl.style.display = "block"
-        } else {
-          itemEl.style.display = "none"
-        }
+          if (selectedTag === "all" || itemTag === selectedTag) {
+            itemEl.style.display = "block"
+          } else {
+            itemEl.style.display = "none"
+          }
+        })
       })
     })
   })
@@ -253,11 +259,16 @@ const formattedPosts = posts.map((post) => {
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.3s ease;
   }
 
-  .post-item:hover .post-thumbnail {
-    transform: scale(1.02);
+  @media (prefers-reduced-motion: no-preference) {
+    .post-thumbnail {
+      transition: transform 0.3s ease;
+    }
+
+    .post-item:hover .post-thumbnail {
+      transform: scale(1.02);
+    }
   }
 
   .post-content {

@@ -58,8 +58,7 @@ const linkSvg = icon(faArrowUpRightFromSquare)?.html[0] || ""
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-primary btn-sm icon-btn"
-            aria-label="Visit Site"
-            title="Visit Site"
+            aria-label={`Visit ${title} site`}
           >
             <Fragment set:html={linkSvg} />
           </a>
@@ -73,8 +72,7 @@ const linkSvg = icon(faArrowUpRightFromSquare)?.html[0] || ""
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-secondary btn-sm icon-btn"
-            aria-label="Chrome Store"
-            title="Chrome Store"
+            aria-label={`${title} on Chrome Web Store`}
           >
             <Fragment set:html={chromeSvg} />
           </a>
@@ -88,8 +86,7 @@ const linkSvg = icon(faArrowUpRightFromSquare)?.html[0] || ""
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-secondary btn-sm icon-btn"
-            aria-label="Firefox Add-ons"
-            title="Firefox Add-ons"
+            aria-label={`${title} on Firefox Add-ons`}
           >
             <Fragment set:html={firefoxSvg} />
           </a>
@@ -103,8 +100,7 @@ const linkSvg = icon(faArrowUpRightFromSquare)?.html[0] || ""
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-secondary btn-sm icon-btn"
-            aria-label="GitHub Repository"
-            title="GitHub Repository"
+            aria-label={`${title} GitHub repository`}
           >
             <Fragment set:html={githubSvg} />
           </a>
@@ -143,11 +139,16 @@ const linkSvg = icon(faArrowUpRightFromSquare)?.html[0] || ""
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
   }
 
-  .project-card:hover .project-image {
-    transform: scale(1.03);
+  @media (prefers-reduced-motion: no-preference) {
+    .project-image {
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover .project-image {
+      transform: scale(1.03);
+    }
   }
 
   .card-body {
@@ -207,6 +208,13 @@ const linkSvg = icon(faArrowUpRightFromSquare)?.html[0] || ""
     display: inline-flex;
     align-items: center;
     justify-content: center;
+  }
+
+  @media (pointer: coarse) {
+    .icon-btn {
+      min-inline-size: 44px;
+      min-block-size: 44px;
+    }
   }
 
   .icon-btn :global(svg) {

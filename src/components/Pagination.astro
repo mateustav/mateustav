@@ -139,8 +139,8 @@ if (totalPages <= 7) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 36px;
-    height: 36px;
+    min-inline-size: 36px;
+    min-block-size: 36px;
     padding: 0 0.5rem;
     font-size: 0.875rem;
     font-weight: 500;
@@ -167,10 +167,18 @@ if (totalPages <= 7) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 32px;
-    height: 36px;
+    min-inline-size: 32px;
+    min-block-size: 36px;
     color: var(--text-primary);
     opacity: 0.5;
     font-size: 0.875rem;
+  }
+
+  @media (pointer: coarse) {
+    .page-nav,
+    .page-number {
+      min-inline-size: 44px;
+      min-block-size: 44px;
+    }
   }
 </style>
